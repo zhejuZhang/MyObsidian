@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
       "basename": "GIS--空间数据 (Lecture 2 Spatial Data)",
       "path": "3.学习记录/1.GIS/GIS--空间数据 (Lecture 2 Spatial Data).md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "空间计量",
       "path": "2.思考记录/课程笔记/空间计量.md"
-    },
-    {
-      "basename": "个人Obsidian笔记存储仓库",
-      "path": "个人Obsidian笔记存储仓库.md"
     },
     {
       "basename": "2026-10-19 记录",
