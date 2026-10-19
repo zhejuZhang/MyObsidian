@@ -1,6 +1,30 @@
 {
   "recentFiles": [
     {
+      "basename": "2026-10-19 记录",
+      "path": "每日记录/2026-10/2026-10-19 记录.md"
+    },
+    {
+      "basename": "DailyRemind",
+      "path": "template/DailyRemind.md"
+    },
+    {
+      "basename": "格拉斯哥大学研究生住宿信息汇总",
+      "path": "留学记录/整理/住宿/格拉斯哥大学研究生住宿信息汇总.md"
+    },
+    {
+      "basename": "GIS 研究课题大全",
+      "path": "留学记录/课程/GIS 研究课题大全.md"
+    },
+    {
+      "basename": "Big Data Week 2 group discussion",
+      "path": "留学记录/课程/Big Data Week 2 group discussion.md"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
       "basename": "八极拳小架一路教程",
       "path": "兴趣/武术/八极拳/八极拳小架一路教程.md"
     },
@@ -13,14 +37,6 @@
       "path": "附件/我们塑造工具，随后工具塑造我们.md"
     },
     {
-      "basename": "GIS 研究课题大全",
-      "path": "留学记录/课程/GIS 研究课题大全.md"
-    },
-    {
-      "basename": "Big Data Week 2 group discussion",
-      "path": "留学记录/课程/Big Data Week 2 group discussion.md"
-    },
-    {
       "basename": "API Key",
       "path": "学习笔记/LLM/API Key.md"
     },
@@ -31,10 +47,6 @@
     {
       "basename": "GIS--空间数据 (Lecture 2 Spatial Data)",
       "path": "留学记录/课程/GIS--空间数据 (Lecture 2 Spatial Data).md"
-    },
-    {
-      "basename": "1v1rad",
-      "path": "留学记录/整理/1v1rad.md"
     },
     {
       "basename": "02.概念关系图",
@@ -109,28 +121,8 @@
       "path": "学习笔记/研究思考/1. 街景环境与运动路线/FINAL_SUMMARY.md"
     },
     {
-      "basename": "week 6 RAD",
-      "path": "留学记录/整理/week 6 RAD.md"
-    },
-    {
-      "basename": "homework",
-      "path": "留学记录/整理/homework.md"
-    },
-    {
       "basename": "01-城市科学理论基础",
       "path": "学习笔记/知识体系构建/城市分析Urban Analytics/01-理论基石/01-城市科学理论基础.md"
-    },
-    {
-      "basename": "souces note",
-      "path": "留学记录/整理/souces note.md"
-    },
-    {
-      "basename": "2.6 Create a set of notes",
-      "path": "留学记录/整理/2.6 Create a set of notes.md"
-    },
-    {
-      "basename": "week5 rad",
-      "path": "留学记录/整理/week5 rad.md"
     },
     {
       "basename": "02-复杂系统理论与城市涌现",
@@ -143,14 +135,6 @@
     {
       "basename": "城市分析知识体系构建：从理论基石到城市智能与可持续性的前沿演进",
       "path": "学习笔记/知识体系构建/城市分析Urban Analytics/城市分析知识体系构建：从理论基石到城市智能与可持续性的前沿演进.md"
-    },
-    {
-      "basename": "EE Writing",
-      "path": "留学记录/整理/EE Writing.md"
-    },
-    {
-      "basename": "Overall Summary 概括",
-      "path": "留学记录/整理/Overall Summary 概括.md"
     },
     {
       "basename": "chatGPT 城市分析方法",
