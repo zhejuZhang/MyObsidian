@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.google.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh repo *)",
+      "Bash(curl -s \"https://api.github.com/repos/pjasicek/OpenClaw\")",
+      "Bash(curl -s \"https://api.github.com/repos/pjasicek/OpenClaw/readme\")",
+      "Bash(python -c \"import sys, json, base64; data=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(data['content']\\).decode\\('utf-8'\\)[:2000]\\)\")",
+      "Bash(python -c \"import sys, json; data=json.load\\(sys.stdin\\); print\\(f'Stars: {data[\\\\\"stargazers_count\\\\\"]}'\\); print\\(f'Forks: {data[\\\\\"forks_count\\\\\"]}'\\); print\\(f'Language: {data[\\\\\"language\\\\\"]}'\\); print\\(f'License: {data[\\\\\"license\\\\\"][\\\\\"name\\\\\"] if data[\\\\\"license\\\\\"] else \\\\\"N/A\\\\\"}'\\); print\\(f'Created: {data[\\\\\"created_at\\\\\"]}'\\); print\\(f'Updated: {data[\\\\\"updated_at\\\\\"]}'\\)\")"
+    ]
+  }
+}

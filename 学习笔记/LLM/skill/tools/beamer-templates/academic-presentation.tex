@@ -1,0 +1,364 @@
+% 学术报告 Beamer 模板
+% 使用方法：xelatex academic-presentation.tex
+
+\documentclass[aspectratio=169]{beamer}
+
+% ============================================================
+% 主题设置
+% ============================================================
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+% ============================================================
+% 宏包
+% ============================================================
+\usepackage[UTF8]{ctex}          % 中文支持
+\usepackage{amsmath,amssymb}     % 数学公式
+\usepackage{graphicx}            % 图片
+\usepackage{booktabs}            % 专业表格
+\usepackage{listings}            % 代码块
+\usepackage{tikz}                % 绘图
+\usetikzlibrary{shapes,arrows,positioning}
+\usepackage{hyperref}            % 超链接
+
+% ============================================================
+% 代码块样式
+% ============================================================
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=single,
+  backgroundcolor=\color{gray!10},
+  showstringspaces=false,
+}
+
+% ============================================================
+% 标题信息
+% ============================================================
+\title[短标题]{基于深度学习的文本分类研究}
+\subtitle{学术报告}
+\author[作者]{作者姓名}
+\institute[机构]{某某大学 \\ 计算机科学与技术学院}
+\date{\today}
+\titlegraphic{
+  % \includegraphics[height=1cm]{logo.png}
+}
+
+% ============================================================
+% 文档开始
+% ============================================================
+\begin{document}
+
+% ------------------------------------------------------------
+% 封面
+% ------------------------------------------------------------
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% ------------------------------------------------------------
+% 目录
+% ------------------------------------------------------------
+\begin{frame}{目录}
+  \tableofcontents
+\end{frame}
+
+% ============================================================
+% 第一部分：引言
+% ============================================================
+\section{引言}
+
+% ------------------------------------------------------------
+\begin{frame}{研究背景}
+  \begin{itemize}
+    \item 文本分类是自然语言处理的基础任务
+    \item 传统方法依赖人工特征工程
+    \item 深度学习方法展现出强大潜力
+  \end{itemize}
+
+  \vspace{1em}
+  \begin{block}{研究动机}
+    如何设计更有效的深度学习模型来提升文本分类性能？
+  \end{block}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{研究目标}
+  \begin{quote}
+    提出一种基于 Transformer 的文本分类方法，提升分类准确率并降低人工特征工程成本。
+  \end{quote}
+
+  \vspace{1em}
+  \textbf{主要创新点：}
+  \begin{enumerate}
+    \item 动态注意力机制
+    \item 多尺度特征融合
+    \item 对比学习损失函数
+  \end{enumerate}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{相关工作}
+  \begin{table}
+    \centering
+    \small
+    \begin{tabular}{lcc}
+      \toprule
+      方法 & 优点 & 缺点 \\
+      \midrule
+      TextCNN & 速度快 & 捕获长距离依赖能力弱 \\
+      LSTM & 序列建模强 & 并行化困难 \\
+      BERT & 预训练强大 & 计算成本高 \\
+      \bottomrule
+    \end{tabular}
+    \caption{现有方法对比}
+  \end{table}
+\end{frame}
+
+% ============================================================
+% 第二部分：方法
+% ============================================================
+\section{研究方法}
+
+% ------------------------------------------------------------
+\begin{frame}{模型架构}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{模型结构：}
+      \begin{enumerate}
+        \item 预训练编码器 (BERT)
+        \item 动态注意力池化层
+        \item 多尺度特征融合
+        \item 分类头 (MLP)
+      \end{enumerate}
+
+      \vspace{1em}
+      \textbf{训练策略：}
+      \begin{itemize}
+        \item 学习率：$2 \times 10^{-5}$
+        \item Batch size：32
+        \item Epochs：10
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      % 流程图
+      \begin{tikzpicture}[
+        node distance=1.5cm,
+        block/.style={
+          rectangle, draw, fill=blue!20,
+          text width=4em, text centered,
+          rounded corners, minimum height=2em
+        },
+        line/.style={draw, -latex}
+      ]
+        \node [block] (input) {输入};
+        \node [block, below of=input] (bert) {BERT};
+        \node [block, below of=bert] (attn) {注意力};
+        \node [block, below of=attn] (fusion) {融合};
+        \node [block, below of=fusion] (output) {输出};
+
+        \path [line] (input) -- (bert);
+        \path [line] (bert) -- (attn);
+        \path [line] (attn) -- (fusion);
+        \path [line] (fusion) -- (output);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{损失函数}
+  总损失函数：
+  \begin{equation}
+    \mathcal{L} = \mathcal{L}_{CE} + \lambda \mathcal{L}_{CL}
+  \end{equation}
+
+  其中对比学习损失：
+  \begin{equation}
+    \mathcal{L}_{CL} = -\log \frac{\exp(\text{sim}(z_i, z_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{k \neq i} \exp(\text{sim}(z_i, z_k) / \tau)}
+  \end{equation}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item $\mathcal{L}_{CE}$：交叉熵损失
+    \item $\mathcal{L}_{CL}$：对比学习损失
+    \item $\lambda$：平衡系数
+    \item $\tau$：温度参数
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% 第三部分：实验
+% ============================================================
+\section{实验}
+
+% ------------------------------------------------------------
+\begin{frame}{数据集}
+  \begin{table}
+    \centering
+    \begin{tabular}{lccc}
+      \toprule
+      数据集 & 训练集 & 测试集 & 类别数 \\
+      \midrule
+      AG News & 120K & 7.6K & 4 \\
+      IMDB & 25K & 25K & 2 \\
+      SST-2 & 67K & 1.8K & 2 \\
+      \bottomrule
+    \end{tabular}
+    \caption{实验数据集统计}
+  \end{table}
+
+  \vspace{1em}
+  \textbf{评估指标：}
+  \begin{itemize}
+    \item 准确率 (Accuracy)
+    \item 精确率 (Precision)
+    \item 召回率 (Recall)
+    \item F1 分数
+  \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{实验结果}
+  \begin{table}
+    \centering
+    \begin{tabular}{lccc}
+      \toprule
+      方法 & AG News & IMDB & SST-2 \\
+      \midrule
+      TextCNN & 91.2\% & 89.5\% & 90.1\% \\
+      LSTM & 92.1\% & 90.3\% & 91.2\% \\
+      BERT-base & 94.5\% & 93.2\% & 93.5\% \\
+      \textbf{Ours} & \textbf{96.1\%} & \textbf{95.3\%} & \textbf{95.8\%} \\
+      \bottomrule
+    \end{tabular}
+    \caption{各方法在不同数据集上的准确率}
+  \end{table}
+
+  \vspace{0.5em}
+  \begin{alertblock}{关键发现}
+    我们的方法在所有数据集上均取得最优结果，平均提升 1.6\%。
+  \end{alertblock}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{消融实验}
+  \begin{table}
+    \centering
+    \begin{tabular}{lcc}
+      \toprule
+      模型变体 & AG News & 平均 \\
+      \midrule
+      Full Model & \textbf{96.1\%} & \textbf{95.7\%} \\
+      w/o Attention & 95.2\% & 94.8\% \\
+      w/o Multi-scale & 95.5\% & 95.1\% \\
+      w/o Contrastive & 95.8\% & 95.3\% \\
+      \bottomrule
+    \end{tabular}
+    \caption{消融实验结果}
+  \end{table}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item 注意力机制贡献最大 (+0.9\%)
+    \item 多尺度融合次之 (+0.6\%)
+    \item 对比学习损失 (+0.4\%)
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% 第四部分：结论
+% ============================================================
+\section{结论}
+
+% ------------------------------------------------------------
+\begin{frame}{主要贡献}
+  \begin{enumerate}
+    \item 提出了动态注意力池化机制
+    \begin{itemize}
+      \item 自适应地关注重要文本片段
+      \item 提升特征表示质量
+    \end{itemize}
+
+    \item 设计了多尺度特征融合模块
+    \begin{itemize}
+      \item 捕获不同粒度的语义信息
+      \item 增强模型表达能力
+    \end{itemize}
+
+    \item 引入对比学习损失函数
+    \begin{itemize}
+      \item 学习更鲁棒的特征表示
+      \item 提升泛化能力
+    \end{itemize}
+
+    \item 在三个基准数据集上取得 SOTA
+  \end{enumerate}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{未来工作}
+  \begin{itemize}
+    \item \textbf{多语言扩展}
+    \begin{itemize}
+      \item 支持更多语言的文本分类
+      \item 探索跨语言迁移学习
+    \end{itemize}
+
+    \item \textbf{效率优化}
+    \begin{itemize}
+      \item 模型压缩和量化
+      \item 知识蒸馏
+    \end{itemize}
+
+    \item \textbf{应用拓展}
+    \begin{itemize}
+      \item 情感分析
+      \item 命名实体识别
+      \item 问答系统
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{代码示例}
+  \begin{lstlisting}[language=Python]
+import torch
+from transformers import BertModel
+
+class TextClassifier(torch.nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.bert = BertModel.from_pretrained('bert-base')
+        self.attention = DynamicAttention()
+        self.classifier = torch.nn.Linear(768, num_classes)
+
+    def forward(self, input_ids, attention_mask):
+        outputs = self.bert(input_ids, attention_mask)
+        pooled = self.attention(outputs.last_hidden_state)
+        return self.classifier(pooled)
+  \end{lstlisting}
+\end{frame}
+
+% ============================================================
+% 致谢
+% ============================================================
+\begin{frame}
+  \centering
+  \Huge 谢谢！
+
+  \vspace{2em}
+  \Large Q\&A
+
+  \vspace{2em}
+  \normalsize
+  联系方式：\href{mailto:email@example.com}{email@example.com} \\
+  GitHub：\href{https://github.com/username}{github.com/username}
+\end{frame}
+
+\end{document}

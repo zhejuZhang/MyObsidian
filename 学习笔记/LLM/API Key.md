@@ -1,0 +1,22 @@
+## Xiaomi mimo: 
+tp-cmhnxdhace5aar5njcysb8m7j4ijt0ehkwok6lzqmwrun7ub过期
+tp-cq8k6oa03zf79vowpw7ecyzzu3f6ntshk71deh9w1k9cmx3l（6-23）
+sk-coaynvectrytf9pbogoxokvycp28e98c2lrk043zo9u3n7ro
+## deepseek:
+ClaudeCode：sk-d90ee556e10b4dcfad95cfc96f513dec
+Codex：sk-a11764e8c0d041109af4a302e416fcc9
+auto-caption：sk-4dd4d9d48e064db1aab86694acca59e4
+
+
+163邮箱授权码：BPTTmfw6UL3mrYfT
+AZkbw34peXYvvhST
+s
+qq邮箱授权码：mujiwaftbpugbcah
+
+格拉斯哥邮箱： 3281675Z@student.gla.ac.uk
+密码：CCF&zzj62442
+
+阿里云百炼：sk-ws-H.RXYXYMD.ItEw.MEYCIQCDxYU2B56tzh9mFBjjgNMqgOH23XysjyolrKZEKtimtgIhAJbhI4gMi2kmSw3ipmLCGYnLNNaoxVDL6KQPXt4wEgSc
+
+智谱
+0f71f8ad725242e79f3799b91f54294e.6yNpKiunqIJZma5U

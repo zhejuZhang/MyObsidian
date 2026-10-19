@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:api.semanticscholar.org)",
+      "WebFetch(domain:scholar.google.com)",
+      "WebFetch(domain:arxiv.org)",
+      "Bash(curl -s \"https://api.semanticscholar.org/graph/v1/paper/search?query=spatial+big+data+analysis+geographic+deep+learning&year=2023-2025&limit=10&fields=title,year,venue,externalIds,openAccessPdf,citationCount\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -v \"https://api.semanticscholar.org/graph/v1/paper/search?query=spatial+big+data&year=2023-2025&limit=5&fields=title,year\")",
+      "Bash(curl -s \"http://export.arxiv.org/api/query?search_query=all:spatial+big+data&start=0&max_results=5\")",
+      "Bash(curl *)",
+      "Bash(curl -s \"https://api.openalex.org/works?search=spatial+big+data+analysis+geographic&filter=publication_year:2023-2025&per_page=10&sort=cited_by_count:desc\")",
+      "Bash(python3)",
+      "Bash(python3 *)",
+      "Bash(python *)",
+      "WebFetch(domain:www.researchgate.net)",
+      "WebFetch(domain:www.gla.ac.uk)",
+      "WebFetch(domain:orcid.org)",
+      "WebFetch(domain:explore.research.ed.ac.uk)",
+      "Bash(node *)"
+    ]
+  }
+}
