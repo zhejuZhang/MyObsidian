@@ -1,32 +1,36 @@
 {
   "recentFiles": [
     {
-      "basename": "WR 01 大数据、可及性与城市房价",
-      "path": "2.思考记录/课程笔记/WR 01 大数据、可及性与城市房价.md"
+      "basename": "R05 部分 Biljecki and Ito 2021 review 街景影像在城市分析与地理信息系统中的应用",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R05 部分 Biljecki and Ito 2021 review 街景影像在城市分析与地理信息系统中的应用.md"
     },
     {
-      "basename": "模板 文献编号与短标题",
-      "path": "6.template/模板 文献编号与短标题.md"
+      "basename": "R04 摘要 boyd and Crawford 2012 概念认知补读",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R04 摘要 boyd and Crawford 2012 概念认知补读.md"
     },
     {
-      "basename": "R05 Biljecki and Ito 2021",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R05 Biljecki and Ito 2021.md"
+      "basename": "R03 摘要 Kitchin 2014 概念认知补读",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R03 摘要 Kitchin 2014 概念认知补读.md"
+    },
+    {
+      "basename": "F01 Yulong Chen et la. Location optimization",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/F01 Yulong Chen et la. Location optimization.md"
+    },
+    {
+      "basename": "R01 He et al. 2026",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R01 He et al. 2026.md"
     },
     {
       "basename": "R02 Batty 2019 - 理论 Urban analytics defined",
       "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R02 Batty 2019 - 理论 Urban analytics defined.md"
     },
     {
-      "basename": "R04 boyd and Crawford 2012 概念认知补读",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R04 boyd and Crawford 2012 概念认知补读.md"
+      "basename": "WR 01 大数据、可及性与城市房价",
+      "path": "2.思考记录/课程笔记/WR 01 大数据、可及性与城市房价.md"
     },
     {
-      "basename": "R03 Kitchin 2014 概念认知补读",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R03 Kitchin 2014 概念认知补读.md"
-    },
-    {
-      "basename": "R01 He et al. 2026",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R01 He et al. 2026.md"
+      "basename": "模板 文献编号与短标题",
+      "path": "6.template/模板 文献编号与短标题.md"
     },
     {
       "basename": "2026-10-29",
@@ -43,10 +47,6 @@
     {
       "basename": "2026-10-22",
       "path": "1.每日记录/2026-10/2026-10-22.md"
-    },
-    {
-      "basename": "空间计量",
-      "path": "2.思考记录/课程笔记/空间计量.md"
     },
     {
       "basename": "2.Claude Code",
@@ -195,10 +195,6 @@
     {
       "basename": "00-城市分析知识体系总索引",
       "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/00-城市分析知识体系总索引.md"
-    },
-    {
-      "basename": "城市分析知识体系构建：从理论基石到城市智能与可持续性的前沿演进",
-      "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/城市分析知识体系构建：从理论基石到城市智能与可持续性的前沿演进.md"
     }
   ],
   "omittedPaths": [],
