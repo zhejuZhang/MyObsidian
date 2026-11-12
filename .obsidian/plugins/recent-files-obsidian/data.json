@@ -1,24 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "R04 boyd and Crawford 2012",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R04 boyd and Crawford 2012.md"
+      "basename": "WR 01 大数据、可及性与城市房价",
+      "path": "2.思考记录/课程笔记/WR 01 大数据、可及性与城市房价.md"
     },
     {
-      "basename": "R03 Kitchin 2014 概念认知",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R03 Kitchin 2014 概念认知.md"
+      "basename": "模板 文献编号与短标题",
+      "path": "6.template/模板 文献编号与短标题.md"
+    },
+    {
+      "basename": "R05 Biljecki and Ito 2021",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R05 Biljecki and Ito 2021.md"
+    },
+    {
+      "basename": "R02 Batty 2019 - 理论 Urban analytics defined",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R02 Batty 2019 - 理论 Urban analytics defined.md"
+    },
+    {
+      "basename": "R04 boyd and Crawford 2012 概念认知补读",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R04 boyd and Crawford 2012 概念认知补读.md"
+    },
+    {
+      "basename": "R03 Kitchin 2014 概念认知补读",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R03 Kitchin 2014 概念认知补读.md"
     },
     {
       "basename": "R01 He et al. 2026",
       "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R01 He et al. 2026.md"
-    },
-    {
-      "basename": "R2 Batty 2019 - 理论 Urban analytics defined",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R2 Batty 2019 - 理论 Urban analytics defined.md"
-    },
-    {
-      "basename": "模板 文献编号与短标题",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/模板 文献编号与短标题.md"
     },
     {
       "basename": "2026-10-29",
@@ -191,14 +199,6 @@
     {
       "basename": "城市分析知识体系构建：从理论基石到城市智能与可持续性的前沿演进",
       "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/城市分析知识体系构建：从理论基石到城市智能与可持续性的前沿演进.md"
-    },
-    {
-      "basename": "chatGPT 城市分析方法",
-      "path": "2.思考记录/研究思考/2.空间分析方法/chatGPT 城市分析方法.md"
-    },
-    {
-      "basename": "codex 城市分析方法_欧氏缓冲区革新方向知识点综述",
-      "path": "2.思考记录/研究思考/2.空间分析方法/codex 城市分析方法_欧氏缓冲区革新方向知识点综述.md"
     }
   ],
   "omittedPaths": [],
