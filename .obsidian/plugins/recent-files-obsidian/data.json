@@ -1,8 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "research proposal",
-      "path": "2.思考记录/研究思考/research proposal.md"
+      "basename": "R2 Batty 2019",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R2 Batty 2019.md"
     },
     {
       "basename": "R01 He et al. 2026",
@@ -13,16 +13,24 @@
       "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/模板 文献编号与短标题.md"
     },
     {
+      "basename": "6.5.结论部分撰写框架",
+      "path": "2.思考记录/研究思考/1.街景环境与运动路线/6.5.结论部分撰写框架.md"
+    },
+    {
+      "basename": "research proposal",
+      "path": "2.思考记录/研究思考/research proposal.md"
+    },
+    {
+      "basename": "2026-10-22",
+      "path": "1.每日记录/2026-10/2026-10-22.md"
+    },
+    {
       "basename": "空间计量",
       "path": "2.思考记录/课程笔记/空间计量.md"
     },
     {
       "basename": "2026-10-29",
       "path": "1.每日记录/2026-10/2026-10-29.md"
-    },
-    {
-      "basename": "2026-10-22",
-      "path": "1.每日记录/2026-10/2026-10-22.md"
     },
     {
       "basename": "2.Claude Code",
@@ -109,10 +117,6 @@
       "path": "2.思考记录/研究思考/1.街景环境与运动路线/6.0.论文各部分撰写框架.md"
     },
     {
-      "basename": "6.5.结论部分撰写框架",
-      "path": "2.思考记录/研究思考/1.街景环境与运动路线/6.5.结论部分撰写框架.md"
-    },
-    {
       "basename": "工作完成报告",
       "path": "2.思考记录/研究思考/1.街景环境与运动路线/工作完成报告.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "Gemini 思考流程",
       "path": "2.思考记录/研究思考/2.空间分析方法/Gemini 思考流程.md"
-    },
-    {
-      "basename": "硕士研究方向规划_Glasgow_Urban_Analytics",
-      "path": "2.思考记录/研究思考/硕士研究方向规划_Glasgow_Urban_Analytics.md"
     }
   ],
   "omittedPaths": [],
