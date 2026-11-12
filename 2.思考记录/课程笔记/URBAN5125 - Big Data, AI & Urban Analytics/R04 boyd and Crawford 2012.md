@@ -1,9 +1,8 @@
-**书目信息：** Kitchin, R. (2014) ‘Big Data, new epistemologies and paradigm shifts’, *Big Data & Society*, 1(1). [DOI 与出版入口](https://doi.org/10.1177/2053951714528481)；[作者公开全文](https://kitchin.org/wp-content/uploads/2019/04/Big-Data-Society-2014-Kitchin-.pdf)。
-
+**书目信息：** boyd, d. and Crawford, K. (2012) ‘Critical Questions for Big Data: Provocations for a Cultural, Technological, and Scholarly Phenomenon’, *Information, Communication & Society*, 15(5), pp.662–679. [DOI 与出版入口](https://doi.org/10.1080/1369118X.2012.678878)；[作者公开稿](https://www.danah.org/papers/2012/BigData-ICS-Draft.pdf)。
 **阅读日期：** 2026年11月12日
 
 **解决什么问题:**  
-	**解决问题思路:**  
+**解决问题思路:**  
 **结论:**  
 **重要语句:**  
 **缺点:**  
