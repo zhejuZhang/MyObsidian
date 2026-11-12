@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "R2 Batty 2019",
-      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R2 Batty 2019.md"
-    },
-    {
       "basename": "R01 He et al. 2026",
       "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R01 He et al. 2026.md"
     },
     {
+      "basename": "R2 Batty 2019 - 理论 Urban analytics defined",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R2 Batty 2019 - 理论 Urban analytics defined.md"
+    },
+    {
       "basename": "模板 文献编号与短标题",
       "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/模板 文献编号与短标题.md"
+    },
+    {
+      "basename": "2026-10-29",
+      "path": "1.每日记录/2026-10/2026-10-29.md"
+    },
+    {
+      "basename": "R03 Kitchin 2014",
+      "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R03 Kitchin 2014.md"
     },
     {
       "basename": "6.5.结论部分撰写框架",
@@ -27,10 +35,6 @@
     {
       "basename": "空间计量",
       "path": "2.思考记录/课程笔记/空间计量.md"
-    },
-    {
-      "basename": "2026-10-29",
-      "path": "1.每日记录/2026-10/2026-10-29.md"
     },
     {
       "basename": "2.Claude Code",
@@ -195,10 +199,6 @@
     {
       "basename": "chatGPT 测试题",
       "path": "2.思考记录/研究思考/2.空间分析方法/chatGPT 测试题.md"
-    },
-    {
-      "basename": "Gemini 思考流程",
-      "path": "2.思考记录/研究思考/2.空间分析方法/Gemini 思考流程.md"
     }
   ],
   "omittedPaths": [],
