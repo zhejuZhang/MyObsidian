@@ -1,4 +1,4 @@
-**书目信息**：Hou, Y. and Biljecki, F. (2022) ‘A comprehensive framework for evaluating the quality of street view imagery’, *International Journal of Applied Earth Observation and Geoinformation*, 115, 103094. [DOI 与出版入口](https://doi.org/10.1016/j.jag.2022.103094)；[作者团队页面与全文入口](https://ual.sg/publication/2022-jag-svi-quality/)。
+**书目信息**：# Street view imagery in urban analytics and GIS: A review https://www.sciencedirect.com/science/article/pii/S0169204621001808?via%3Dihub
 
 **阅读日期：** 2026年11月12日
 
