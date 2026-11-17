@@ -174,7 +174,7 @@ import pandas as pd
 import geopandas as gpd
 
 import matplotlib.pyplot as plt
-
+p
   
 
 # Print the first few rows of the art DataFrame
