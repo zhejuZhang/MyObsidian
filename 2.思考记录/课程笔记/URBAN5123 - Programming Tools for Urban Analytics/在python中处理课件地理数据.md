@@ -1,8 +1,9 @@
-# 介绍
-##  位置
+# 构建双图层地图：多边形与散点图的结合
+## 介绍
+###  位置
 介绍位置概念,引出斯诺点图(经典霍乱病毒分布地图)
 
-## 课程将学到
+### 课程将学到
 - 如何用地理点绘制散点图
 - 如何用 geopanda 绘制集合对象
 - 如何从 DataFrame 构建 GeoDataFrame
@@ -10,7 +11,7 @@
 - 如何为图添加街道底图
 - 何时以及如何创建分级填色
 
-## 经度与纬度
+### 经度与纬度
 
 ```python
 plt.scatter(schools.Longitude,
@@ -57,7 +58,7 @@ bus_stops2['lat'] = [lat for lat, lng in lat_lngs]
 bus_stops2['lng'] = [lat for lat, lng in lat_lngs]
 ```
 
-# 几何和 Shapefile
+## 几何和 Shapefile
 shapefile 存储一种称为“几何”的特殊数据
 点
 线
@@ -89,3 +90,34 @@ geo_df = gpd.read_file('My_Map_Files/my_map.shp')
 geo_df.head()
 ```
 
+### 查看几何
+```python
+service_district.loc[0,'geometry']
+```
+
+### 绘制 GeoDataFrame
+```python
+school_districts.plot()
+plt.show()
+```
+
+```python
+school_districts.plot(column = 'district', legend = true)
+plt.show()
+```
+
+## 综合运用
+#### 技能清单
+- 了解经纬度
+- 提取经纬度
+- 用经纬度绘制散点图
+- 优化散点图外观与解读
+- 从Shapefile绘制多边形
+
+### 组合散点图与多边形
+```python
+school_districts.plot(column = 'district', legend = True, cmap = 'Set2')
+plt.scatter(schools.lng, schools,lat, marker = 'p', c= 'darkgreen')
+plt.title("Nashville Schools and School Districts')
+plt.show()
+```
