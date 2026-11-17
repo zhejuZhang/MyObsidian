@@ -207,7 +207,7 @@ ax.set_axis_off()
 - `GeoDataFrame` 生成的图本质上是 matplotlib 图，与普通 pandas dataframe 的绘图一致。
 - 因此可以利用 matplotlib 接口继续微调，如设置 x 和 y 的范围、添加标签、修改图像大小等。
 ---
-### 探索与可视化空间数据及其属性
+## 探索与可视化空间数据及其属性
 
 #### 利用 pandas 功能处理空间数据
 - `geopandas` 中的 `GeoDataFrame` 是带有空间能力的 pandas DataFrame。
@@ -286,6 +286,90 @@ ax.set_axis_off()
 
 plt.show()
 ```
+
+---
+
+### Shapely 几何与空间关系
+
+#### 标量几何值
+- 在 `GeoDataFrame` 中，`geometry` 列保存的是矢量要素（如点、线、多边形）。
+- 使用 `loc` 属性可以根据行标签和列名提取单个几何值。
+- 示例代码：提取行标签为 170（布鲁塞尔）的几何值并查看类型：
+```python
+brussels = cities.loc[170, 'geometry']
+print(brussels)
+# 输出: POINT (4.33137074969045 50.83526293533032)
+
+type(brussels)
+# 输出: shapely.geometry.point.Point
+```
+- 提取出的单个值是一个 `shapely` 的 `Point` 对象。
+
+#### Shapely 包
+- Shapely 是用于几何对象操作与分析的 Python 包。
+- 它提供了 `Point`、`LineString` 和 `Polygon` 等几何对象，GeoPandas 在底层正是基于 Shapely 工作。
+- `GeoDataFrame` 中的 `geometry` 列（`GeoSeries`）实际上是由 Shapely 对象组成的。
+
+#### 几何对象
+- 可以像访问 pandas DataFrame 里的任意单个值一样，访问 `GeoDataFrame` 中的几何对象。
+- 示例代码，提取多个几何对象以备后续使用：
+```python
+brussels = cities.loc[170, 'geometry']
+paris = cities.loc[235, 'geometry']
+belgium = countries.loc[countries['name'] == 'Belgium', 'geometry'].squeeze()
+france = countries.loc[countries['name'] == 'France', 'geometry'].squeeze()
+uk = countries.loc[countries['name'] == 'United Kingdom', 'geometry'].squeeze()
+```
+- 几何对象也可以手动创建，例如创建一个坐标为 `1` 和 `2` 的 `Point`：
+```python
+from shapely.geometry import Point
+p = Point(1, 2)
+print(p)
+# 输出: POINT (1 2)
+```
+
+#### 空间方法
+- Shapely 的几何对象内置了空间功能。
+- **面积属性**：`Polygon` 具有 `area` 属性：
+```python
+belgium.area
+# 输出: 3.8299974609075753
+```
+- **距离方法**：`distance` 方法用于计算两个几何之间的距离（如直线距离）：
+```python
+brussels.distance(paris)
+# 输出: 2.8049127723186214
+```
+- 此外，Shapely 还提供了许多其他开箱即用的空间方法。
+
+#### 空间关系
+- Shapely 可以用来描述不同几何之间的空间关系。
+- 将多个几何对象放入一个 `GeoSeries` 中可以同时可视化它们：
+```python
+geopandas.GeoSeries([belgium, france, uk, paris, brussels, line]).plot()
+```
+- **常见空间关系概念**：
+  - 布鲁塞尔位于比利时多边形的“内部”。
+  - 比利时“包含”布鲁塞尔这个点。
+  - 比利时边界与法国边界“相接”，即它们是邻国。
+  - 连接巴黎和布鲁塞尔的线“相交”了法国和比利时，但未相交英国。
+- **代码实现**：
+  - 使用 `contains` 方法检查包含关系：
+```python
+belgium.contains(brussels)
+# 输出: True
+
+france.contains(brussels)
+# 输出: False
+```
+  - 其他空间关系可通过 `within`（在内部）、`touches`（相接）、`intersects`（相交）等方法表达：
+```python
+brussels.within(belgium)   # 输出: True
+belgium.touches(france)    # 输出: True
+line.intersects(france)    # 输出: True
+line.intersects(uk)        # 输出: False
+```
+
 
 # 空间关系
 
