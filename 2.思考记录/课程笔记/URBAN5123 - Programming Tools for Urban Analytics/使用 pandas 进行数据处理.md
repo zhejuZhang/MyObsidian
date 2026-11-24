@@ -133,7 +133,7 @@ unique_dogs["breed"].value_counts(normalize=True)
 ```
 - 例如，结果显示 `Labrador 0.250`，表示有 25% 的狗是拉布拉多。
 
-### 分组汇总统计
+## 分组汇总统计
 
 #### 分组汇总的动机
 - 之前学习的是为整个数据集的所有行计算单一的汇总统计量。
@@ -201,3 +201,62 @@ unemp_fuel_stats = sales.groupby('type')[['unemployment','fuel_price_usd_per_l
 
 print(unemp_fuel_stats)
 ```
+
+
+
+## 数据透视表
+
+#### 基本概念
+- 数据透视表是另一种计算分组汇总统计的方法，与电子表格中的透视表功能类似。
+- 在 pandas 中，使用 `pivot_table()` 方法可以轻松实现。
+
+#### 从分组到透视表
+- 使用 `pivot_table` 可以达到与 `groupby` 相同的效果。
+  - `values` 参数：指定您想要汇总的列。
+  - `index` 参数：指定您想要分组的列。
+- 默认情况下，`pivot_table` 会对每个分组取**平均值**。
+```python
+# 使用 groupby
+dogs.groupby("color")["weight_kg"].mean()
+
+# 使用 pivot_table
+dogs.pivot_table(values="weight_kg", index="color")
+```
+
+#### 应用不同统计量
+- 如果需要计算不同的汇总统计，可以使用 `aggfunc` 参数并传入相应的函数（如计算中位数）。
+```python
+dogs.pivot_table(values="weight_kg", index="color", aggfunc="median")
+```
+
+#### 计算多种统计量
+- 如果想一次性获得多种汇总统计，可以给 `aggfunc` 参数传入一个函数列表（如同时计算平均值和中位数）。
+```python
+dogs.pivot_table(values="weight_kg", index="color", aggfunc=["mean", "median"])
+```
+
+#### 按两个变量透视
+- 要按两个变量（如颜色和品种）分组，可以在 `columns` 参数中指定第二个变量。
+```python
+dogs.pivot_table(values="weight_kg", index="color", columns="breed")
+```
+- **注意**：结果中会出现 `NaN`（缺失值），这是因为某些组合在数据集中不存在（例如没有黑色吉娃娃或灰色拉布拉多）。展示方式与 `groupby` 略有不同（形成矩阵式表格），但数值含义相同。
+
+#### 在透视表中填充缺失值
+- 如果不希望显示缺失值，可以使用 `fill_value` 参数指定填充内容（如填充为 0）。
+```python
+dogs.pivot_table(values="weight_kg", index="color", columns="breed", fill_value=0)
+```
+
+#### 透视表求和（添加边际汇总）
+- 将 `margins` 参数设置为 `True` 后，数据透视表的最后一行和最后一列会给出各自列或行的总体均值汇总。
+- **注意**：计算均值时，不会把用 0 填充的缺失值算进去。
+- **示例解读**：
+  - 拉布拉多列的最后一行：拉布拉多犬的平均体重（26 kg）。
+  - 棕色行的最后一列：棕色狗的平均体重（24 kg）。
+  - 右下角数值：整个数据集中所有狗的平均体重。
+```python
+dogs.pivot_table(values="weight_kg", index="color", columns="breed", 
+                 fill_value=0, margins=True)
+```
+- **优势**：开启 `margins=True` 可以同时查看到多个层级的汇总统计（整个数据集、按单一变量分组、按双变量分组）。
