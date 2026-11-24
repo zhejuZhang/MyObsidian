@@ -93,6 +93,58 @@ ax.set_ylabel("Average temperature (Fahrenheit)")
 ax.set_title("Weather in Seattle")
 ```
 
+---
+
+
+### 小倍数图
+
+#### 为什么需要小倍数图
+- 当试图在一张图表中添加过多数据时，画面会变得拥挤，不仅无法揭示模式，反而会掩盖它们。
+- **小倍数图（Small multiples）**：使用多张小图，在不同条件下展示相似的数据（例如，按城市分开展示降水数据）。
+
+#### 使用 `plt.subplots` 创建子图
+- 在 Matplotlib 中，小倍数图通过子图（subplots）实现。
+- 向 `plt.subplots()` 传入行数和列数，即可创建网格布局的子图。
+```python
+# 创建包含 3 行 2 列子图的 Figure
+fig, ax = plt.subplots(3, 2)
+```
+- **注意**：此时变量 `ax` 不再是一个单一的 Axes 对象，而是一个 **Axes 对象的 numpy 数组**（形状为 `(3, 2)`）。
+
+#### 向子图添加数据
+- 需要先对 `ax` 数组进行索引，找到特定的子图，然后再调用 `.plot()` 方法。
+```python
+# 在左上角（第 1 行，第 1 列）的子图中绘图
+ax[0, 0].plot(seattle_weather["MONTH"], seattle_weather["MLY-PRCP-NORMAL"], color='b')
+```
+
+#### 一维布局的特殊情况
+- 如果子图只有一行或只有一列，返回的 `ax` 数组将是**一维**的，只需提供单个索引。
+```python
+# 创建 2 行 1 列的子图
+fig, ax = plt.subplots(2, 1)
+
+# 顶部子图（西雅图）
+ax[0].plot(seattle_weather["MONTH"], seattle_weather["MLY-PRCP-NORMAL"], color='b')
+
+# 底部子图（奥斯汀）
+ax[1].plot(austin_weather["MONTH"], austin_weather["MLY-PRCP-NORMAL"], color='r')
+
+# 为子图分别设置标签
+ax[0].set_ylabel("Precipitation (inches)")
+ax[1].set_ylabel("Precipitation (inches)")
+ax[1].set_xlabel("Time (months)")
+plt.show()
+```
+
+#### 共享坐标轴范围
+- 上下对比两个城市的数据时，如果两个数据集的数值范围不同，它们的 y 轴范围可能不一致，影响对比。
+- 可以在创建子图时，通过设置 `sharey=True` 来让所有子图共享同一个 y 轴范围。
+```python
+fig, ax = plt.subplots(2, 1, sharey=True)
+```
+- 共享 y 轴后，跨数据集的比较将更加直接和准确。
+
 #### 最终展示
 完成所有自定义后，最后调用 `plt.show()` 显示图表。
 
