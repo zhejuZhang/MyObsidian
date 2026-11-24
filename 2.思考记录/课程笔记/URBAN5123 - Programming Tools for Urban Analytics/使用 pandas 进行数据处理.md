@@ -403,6 +403,43 @@ dogs.loc["2014":"2016"]
 dogs.iloc[2:5, 1:4]
 ```
 
+---
+
+### 使用数据透视表的高级操作
+
+#### 更大的狗数据集与透视表回顾
+- 使用包含更多样本的狗狗数据集进行更复杂的计算。
+- 复习创建透视表的方法，使用 `pivot_table()`：
+  - 第一个参数：要聚合的数值列名（默认聚合函数是平均值）。
+  - `index` 参数：要分组并显示为行的列。
+  - `columns` 参数：要分组并显示为列的列。
+```python
+dogs_height_by_breed_vs_color = dog_pack.pivot_table(
+    "height_cm", index="breed", columns="color")
+print(dogs_height_by_breed_vs_color)
+```
+
+#### `.loc[]` + 切片
+- 数据透视表本质上就是带有排序索引的 DataFrame，因此之前学过的索引和切片技巧都可以用在这里。
+- 使用 `loc` 配合切片非常适合对透视表进行子集筛选：
+```python
+dogs_height_by_breed_vs_color.loc["Chow Chow":"Poodle"]
+```
+
+#### `axis` 参数
+- 计算 DataFrame 汇总统计量的方法（如 `mean()`）通常带有一个 `axis` 参数。
+- **默认行为（跨行计算）**：默认值是 `axis="index"`，意思是跨行计算统计量。例如，为每种**颜色**计算平均身高（即跨品种计算）。
+```python
+dogs_height_by_breed_vs_color.mean(axis="index")
+```
+- **跨列计算**：如果要为每一行计算汇总统计量（跨列计算），将 `axis` 设为 `"columns"`。例如，为每个**品种**计算平均身高（即跨颜色计算）。
+```python
+dogs_height_by_breed_vs_color.mean(axis="columns")
+```
+
+#### 使用注意
+- 对大多数 DataFrame 来说，跨列计算（`axis="columns"`）往往不太合理，因为各列的数据类型通常不同（如数值、字符串等混合）。
+- 但**数据透视表是个特例**，它的每一列数据类型都是一致的，因此跨列计算是有意义的。
 
 
 
