@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Matplotlib 数据可视化入门",
+      "path": "2.思考记录/课程笔记/URBAN5123 - Programming Tools for Urban Analytics/Matplotlib 数据可视化入门.md"
+    },
+    {
       "basename": "使用 pandas 进行数据处理",
       "path": "2.思考记录/课程笔记/URBAN5123 - Programming Tools for Urban Analytics/使用 pandas 进行数据处理.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "FINAL_SUMMARY",
       "path": "2.思考记录/研究思考/1.街景环境与运动路线/FINAL_SUMMARY.md"
-    },
-    {
-      "basename": "01-城市科学理论基础",
-      "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/01-理论基石/01-城市科学理论基础.md"
     }
   ],
   "omittedPaths": [],
