@@ -516,3 +516,141 @@ plt.show()
 
 ### 后续数据集
 - 本章后续将使用包含美国牛油果每周销售数据的 Avocado 数据集进行练习（数据按牛油果大小及是否为有机进行划分）。
+
+
+---
+
+### 缺失值处理
+
+#### 什么是缺失值
+- 大多数数据都不完美，数据集中可能缺少某些项（例如，给狗狗称重时秤坏了）。
+- 在 pandas 的 DataFrame 中，缺失值用 `NaN` 表示，即 "not a number"。
+
+#### 检测缺失值
+- **基础检测**：对 DataFrame 调用 `isna()` 方法，会返回一个相同大小的布尔型 DataFrame，指示每个位置的值是否缺失。
+```python
+dogs.isna()
+```
+- **检测列中是否存在缺失**：将 `isna()` 和 `any()` 链接使用，会为每一列返回一个布尔值，表示该列是否有任何缺失值。
+```python
+dogs.isna().any()
+```
+- **统计缺失数量**：因为对布尔值求和等同于计算 `True` 的数量，将 `sum()` 和 `isna()` 结合，可以统计每一列中 `NaN` 的数量。
+```python
+dogs.isna().sum()
+```
+
+#### 可视化缺失值
+- 可以将每列的缺失计数用柱状图直观地展示出来。
+- 当不同变量中都有缺失数据时，这种图能提供很好的信息。
+```python
+import matplotlib.pyplot as plt
+dogs.isna().sum().plot(kind="bar")
+plt.show()
+```
+
+#### 处理缺失值的方法
+- **删除缺失值**：使用 `dropna()` 方法可以删除包含缺失值的行。
+```python
+dogs.dropna()
+```
+  - **缺点**：如果缺失值较多，这种方法会丢失大量观测数据，可能不理想。
+- **替换缺失值**：使用 `fillna()` 方法，传入一个指定的值，所有的 `NaN` 都会被替换成该值。
+```python
+dogs.fillna(0)
+```
+  - **进阶**：除了填入固定值，还有更多高级的缺失值填补技术（如插值、填充均值等）。
+
+#### 学习建议
+- 如果想深入学习缺失值填补技术，可以参考数据科学相关的专项课程。
+
+---
+
+---
+
+### 创建 DataFrame
+
+#### 字典基础回顾
+- 在创建 DataFrame 之前，需要先了解 Python 中的字典（Dictionary）。
+- 字典使用花括号 `{}` 创建，保存的是**键值对**（key-value pairs），格式为 `"键": 值`。
+- 通过方括号 `[]` 和键名可以访问字典中的值。
+```python
+my_dict = {
+    "title": "Charlotte's Web",
+    "author": "E.B. White",
+    "published": 1952
+}
+
+print(my_dict["title"])
+# 输出: Charlotte's Web
+```
+
+#### 从零开始创建 DataFrame 的方法
+有两种常见的方法可以从零开始创建 DataFrame：
+1. **由字典列表创建**（按行构建）。
+2. **由列表字典创建**（按列构建）。
+
+#### 方法一：字典列表（按行）
+- 使用方括号 `[]` 创建一个列表，列表中的每个元素都是一个代表一行数据的字典。
+- 字典中的**键将成为列名**，对应的**值是该行在这一列上的数据**。
+- 将包含字典的列表传入 `pd.DataFrame()` 即可转换。
+```python
+data = [
+    {"name": "Ginger", "breed": "Dachshund", "height_cm": 22, "weight_kg": 10},
+    {"name": "Scout", "breed": "Dalmatian", "height_cm": 59, "weight_kg": 25}
+]
+
+df = pd.DataFrame(data)
+```
+
+#### 方法二：列表字典（按列）
+- 使用花括号 `{}` 创建一个字典，按列来整理数据。
+- 字典中的**键将成为列名**，对应的**值是一个包含该列所有数据的列表**（按从上到下的顺序）。
+- 将字典传入 `pd.DataFrame()` 即可转换。
+```python
+data = {
+    "name": ["Ginger", "Scout"],
+    "breed": ["Dachshund", "Dalmatian"],
+    "height_cm": [22, 59],
+    "weight_kg": [10, 25]
+}
+
+df = pd.DataFrame(data)
+```
+
+
+
+---
+### 读取与写入 CSV
+
+#### 什么是 CSV 文件？
+- CSV 全称是 **Comma-Separated Values**（逗号分隔值）。
+- 它是一种常见的文本数据存储格式，专为表格类数据（如 DataFrame）设计。
+- 文件中每一行代表一行数据，每个值之间用逗号分隔。
+- 大多数数据库、编程语言（包括 Python）和电子表格程序都可以使用或生成 CSV 文件。它是与不同工具的用户共享数据的理想格式。
+
+#### 读取 CSV 到 DataFrame
+- 使用 pandas 提供的 `read_csv()` 函数可以方便地将 CSV 文件读取为 DataFrame。
+- 只需将 CSV 的文件路径作为参数传入：
+```python
+import pandas as pd
+
+new_dogs = pd.read_csv("new_dogs.csv")
+print(new_dogs)
+```
+
+#### DataFrame 操作
+- 数据加载为 DataFrame 后，就可以使用 pandas 的各种功能进行处理。
+- 例如，进行向量化运算，基于现有的列创建新列（计算狗狗的 BMI）：
+```python
+new_dogs["bmi"] = new_dogs["weight_kg"] / (new_dogs["height_cm"] / 100) ** 2
+print(new_dogs)
+```
+
+#### 将 DataFrame 写入 CSV
+- 如果修改了数据并希望保存，可以使用 DataFrame 的 `to_csv()` 方法。
+- 传入一个新的文件路径，即可将 DataFrame 导出为 CSV 文件：
+```python
+new_dogs.to_csv("new_dogs_with_bmi.csv")
+```
+- 导出后的新文件将包含所有原始列以及新添加的 `bmi` 列。
