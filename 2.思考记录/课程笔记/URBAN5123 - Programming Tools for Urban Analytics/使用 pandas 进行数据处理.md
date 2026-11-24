@@ -260,3 +260,149 @@ dogs.pivot_table(values="weight_kg", index="color", columns="breed",
                  fill_value=0, margins=True)
 ```
 - **优势**：开启 `margins=True` 可以同时查看到多个层级的汇总统计（整个数据集、按单一变量分组、按双变量分组）。
+
+
+---
+
+
+### 显式索引
+
+#### 回顾 DataFrame 的组成
+- DataFrame 由三部分组成：用于存放数据的 NumPy 数组，以及两个索引（分别保存行和列的信息）。
+- `.columns` 是一个包含列名的 `Index` 对象。
+- `.index` 是一个包含行编号的 `Index` 对象。
+
+#### 设置与重置索引
+- **将列设为索引**：使用 `set_index()` 方法把某一列从 DataFrame 的主体移到索引里。
+```python
+dogs_ind = dogs.set_index("name")
+print(dogs_ind)
+```
+- 视觉提示：设置为索引的列（如 name）会移到最左侧，并且索引的数值会**左对齐**。
+- **移除索引（重置）**：使用 `reset_index()` 方法撤销刚才的操作，将索引恢复为普通列，并创建默认的数字索引。
+```python
+dogs_ind.reset_index()
+```
+- **丢弃索引**：如果不想保留原来的索引数据，可以使用 `reset_index(drop=True)` 完全移除它。
+```python
+dogs_ind.reset_index(drop=True)
+```
+
+#### 使用索引进行子集筛选
+- 使用索引能让子集筛选的代码更简洁。
+- **基于列筛选**（比较冗长）：
+```python
+dogs[dogs["name"].isin(["Bella", "Stella"])]
+```
+- **基于索引筛选**（推荐）：使用 `loc` 方法，直接传入索引值的列表。
+```python
+dogs_ind.loc[["Bella", "Stella"]]
+```
+
+#### 索引值的非唯一性
+- 索引中的取值**不需要唯一**。例如，按品种设置索引，会出现多个 "Labrador"。
+- 如果使用 `loc` 按重复的索引值筛选，所有匹配的行都会返回。
+```python
+dogs_ind2 = dogs.set_index("breed")
+dogs_ind2.loc["Labrador"]
+```
+
+#### 多级索引（层级索引）
+- 通过向 `set_index()` 传入一个列名列表，可以将多列放入索引中，形成**多级索引**（分层索引）。
+- 此时，内层索引嵌套在外层索引之下（如 `color` 嵌套在 `breed` 下）。
+```python
+dogs_ind3 = dogs.set_index(["breed", "color"])
+```
+- **取外层索引**：将外层索引值的列表传给 `loc`。
+```python
+dogs_ind3.loc[["Labrador", "Chihuahua"]]
+```
+- **取内层索引**：传入**元组列表**，元组中依次指定外层和内层的值。返回的行必须满足元组中的所有条件。
+```python
+dogs_ind3.loc[[("Labrador", "Brown"), ("Chihuahua", "Tan")]]
+```
+
+#### 按索引值排序
+- 使用 `sort_index()` 按索引值排序。默认从外到内、按升序排序。
+```python
+dogs_ind3.sort_index()
+```
+- 通过 `level` 和 `ascending` 参数传入列表来控制排序方式（可多级不同方向）。
+```python
+dogs_ind3.sort_index(level=["color", "breed"], ascending=[True, False])
+```
+
+### 索引的争议与优缺点
+
+#### 存在的问题
+- **数据冗余**：索引值本质上也是数据，把同一份数据以多种形式存放会增加理解难度。
+- **违反整洁数据原则**：Tidy Data 原则强调每一行是一条观测，每个变量单独占一列。索引违反了这一点，因为索引值没有自己的列。
+- **语法复杂**：在 pandas 中，操作索引的语法和操作列的语法并不相同。两套语法并行增加了代码的复杂度，容易出错。
+
+#### 结论
+- 如果决定不使用索引，这完全合理。但理解其工作方式仍然有用，特别是为了看懂他人编写的代码。
+
+---
+### 使用 `.loc` 和 `.iloc` 进行切片与子集
+
+#### 基础切片概念
+- **切片**：从对象中选取一段连续元素的技巧。
+- **列表切片**：在方括号中写入起始位置和结束位置，用冒号分开。位置从 0 开始，且**结束位置不包含在切片中**。
+```python
+breeds[2:5]  # 包含索引 2, 3, 4 的元素
+```
+
+#### 对 DataFrame 进行切片（`.loc`）
+- 在使用 `.loc` 切片前，**建议先对索引进行排序**（例如使用 `sort_index()`）。
+- **切片外层索引**：调用 `loc` 并传入起始值和结束值，用冒号分开。
+  - 与列表切片不同：传入的是**索引值**而非行号。
+  - 重要区别：`.loc` 切片**包含最后一个值**。
+```python
+dogs_srt.loc["Chow Chow":"Poodle"]  # 包含 Poodle
+```
+- **错误切片内层索引**：直接在 `loc` 中传内层的起始和结束值（如 `"Tan":"Grey"`）会返回空的 DataFrame，且 pandas 不会报错，需格外小心。
+- **正确切片内层索引**：必须将起始和结束位置作为**元组**传入。
+```python
+dogs_srt.loc[("Labrador", "Brown"):("Schnauzer", "Grey")]
+```
+
+#### 切片列（`.loc` 双参数）
+- DataFrame 是二维对象，可以同时对行和列进行切片，给 `loc` 传入两个参数：`[行切片, 列切片]`。
+- 单独一个冒号 `:` 表示保留全部（所有行或所有列）。
+```python
+# 选取所有行，列从 name 切片到 height_cm
+dogs_srt.loc[:, "name":"height_cm"]
+```
+
+#### 双重切片
+- 同时在行和列上做切片：
+```python
+dogs_srt.loc[
+    ("Labrador", "Brown"):("Schnauzer", "Grey"),
+    "name":"height_cm"
+]
+```
+
+#### 按日期切片
+- 将日期列设为索引并排序后，可按日期范围进行子集选择。
+- **精确日期切片**：起始和结束日期以字符串形式传入。
+```python
+dogs.loc["2014-08-25":"2016-09-16"]
+```
+- **按部分日期切片**：只写年份（如 `"2014"` 和 `"2016"`），pandas 会理解为从 2014 年初到 2016 年末。
+```python
+dogs.loc["2014":"2016"]
+```
+
+#### 按行/列号取子集（`.iloc`）
+- 使用 `.iloc` 方法，通过行号和列号的整数位置进行切片。
+- 语法有两个参数：一个用于行，一个用于列。
+- **注意**：与 `.loc` 不同，`.iloc` 的行为与列表切片一致，**结束位置不包含在结果中**。
+```python
+# 选取第 2, 3, 4 行，以及第 1, 2, 3 列
+dogs.iloc[2:5, 1:4]
+```
+
+
+
+
