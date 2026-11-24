@@ -443,3 +443,76 @@ dogs_height_by_breed_vs_color.mean(axis="columns")
 
 
 
+
+---
+
+### 可视化数据
+
+#### 基础准备
+- 使用 `matplotlib.pyplot` 进行图表展示，通常导入并简写为 `plt`。
+- 本课使用包含大量狗狗数据的 `dog_pack` 数据集进行演示。
+
+#### 直方图
+- 用于展示数值变量的分布。
+- 使用 `.hist()` 方法生成：
+```python
+import matplotlib.pyplot as plt
+dog_pack["height_cm"].hist()
+plt.show()
+```
+- 可通过 `bins` 参数调整柱子的数量，以更清晰地观察数据分布的形状：
+```python
+dog_pack["height_cm"].hist(bins=20)
+```
+
+#### 条形图
+- 用于揭示分类变量（如品种）与数值变量（如体重）之间的关系。
+- 先使用 `groupby` 计算各分类的均值，再使用 `.plot(kind="bar")` 绘制：
+```python
+avg_weight_by_breed = dog_pack.groupby("breed")["weight_kg"].mean()
+avg_weight_by_breed.plot(kind="bar", title="Mean Weight by Dog Breed")
+plt.show()
+```
+
+#### 折线图
+- 非常适合展示数值变量随时间的变化。
+- 需要指定 X 轴和 Y 轴的列，并将 `kind` 设为 `"line"`：
+```python
+sully.plot(x="date", y="weight_kg", kind="line")
+plt.show()
+```
+- 可以通过 `rot` 参数旋转 X 轴标签的角度，使其更易读：
+```python
+sully.plot(x="date", y="weight_kg", kind="line", rot=45)
+```
+
+#### 散点图
+- 用于观察两个数值变量之间的关系。
+- 指定 X 和 Y 轴，将 `kind` 设为 `"scatter"`：
+```python
+dog_pack.plot(x="height_cm", y="weight_kg", kind="scatter")
+plt.show()
+```
+
+#### 图层叠加与图例
+- 可以在同一张图上叠加多个图层（如分别绘制雌性和雄性狗狗的直方图）。
+- 使用 `plt.legend()` 添加图例以区分颜色：
+```python
+dog_pack[dog_pack["sex"]=="F"]["height_cm"].hist()
+dog_pack[dog_pack["sex"]=="M"]["height_cm"].hist()
+plt.legend(["F", "M"])
+plt.show()
+```
+
+#### 透明度
+- 当图层叠加导致遮挡时，可以使用 `alpha` 参数设置透明度。
+- 数值范围 0（完全透明）到 1（完全不透明）：
+```python
+dog_pack[dog_pack["sex"]=="F"]["height_cm"].hist(alpha=0.7)
+dog_pack[dog_pack["sex"]=="M"]["height_cm"].hist(alpha=0.7)
+plt.legend(["F", "M"])
+plt.show()
+```
+
+### 后续数据集
+- 本章后续将使用包含美国牛油果每周销售数据的 Avocado 数据集进行练习（数据按牛油果大小及是否为有机进行划分）。
