@@ -151,6 +151,99 @@ fig, ax = plt.subplots(2, 1, sharey=True)
 
 # 绘制时间序列
 
+### 绘制时间序列数据
+
+#### 时间序列与 DataFrame 索引
+- 时间序列数据（如按时间排列的连续变量）非常适合用来发现数据中的模式。
+- 在处理时间序列时，通常需要让 pandas 将日期列解析为 datetime 格式（`parse_dates`），并将其设置为索引（`index_col`），以便利用 pandas 强大的时间索引功能。
+- 转换后的索引是一个 **`DatetimeIndex`** 对象。Matplotlib 会自动识别该变量为时间类型，并对 x 轴进行智能化处理（如自动按年份显示刻度）。
+
+#### 绘制时间序列数据
+- 在绘图时，直接将 `DatetimeIndex`（即 `df.index`）作为 x 轴，所需的数据列作为 y 轴传入 `plot()` 方法。
+```python
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot(climate_change.index, climate_change['co2'])
+ax.set_xlabel('Time')
+ax.set_ylabel('CO2 (ppm)')
+plt.show()
+```
+- Matplotlib 会自动将 x 轴格式化为年份，并根据数据范围（如几十年）自动设置合适的刻度间隔（如以 10 年为单位）。
+- **缺失值处理**：如果数据包含 `NaN`（如 CO2 测量中未测量的月份），Matplotlib 在绘制折线图时会自动在该处断开，显示出缺口。
+
+#### 放大时间序列（切片）
+- 通过 pandas 的字符串切片，可以非常方便地对 DataFrame 进行时间维度的子集选择。
+- **查看一个十年**：传入起始和结束日期的字符串。Matplotlib 会相应地将 x 轴刻度调整为 1 年。
+```python
+sixties = climate_change["1960-01-01":"1969-12-31"]
+fig, ax = plt.subplots()
+ax.plot(sixties.index, sixties['co2'])
+# ... 设置标签和显示 ...
+```
+- **查看一年**：缩小范围到具体的某一年，Matplotlib 会自动将 x 轴标签细化到月份。
+
+---
+### 使用不同变量绘制时间序列
+
+#### 将两个时间序列一起绘制
+- 当两条时间序列在时间上对齐但记录不同的变量时（如二氧化碳浓度和相对气温），可能需要将它们画在同一张图上。
+- **直接绘制的问题**：如果直接画在同一个 Axes 上，由于两个变量的量纲（单位）不在一个数量级，会导致一条线变化明显，另一条线看起来几乎是一条水平直线。
+
+#### 使用双轴（Twin Axes）
+- 为了让量纲不同的数据在一张图上清晰展示，可以使用双 y 轴。
+- 使用 `ax.twinx()` 方法创建第二个 Axes 对象（孪生轴）。它与第一个 Axes 共享 x 轴，但拥有独立的 y 轴（显示在右侧）。
+```python
+fig, ax = plt.subplots()
+
+# 绘制第一个变量（左轴）
+ax.plot(climate_change.index, climate_change["co2"])
+ax.set_xlabel('Time')
+ax.set_ylabel('CO2 (ppm)')
+
+# 创建孪生轴并绘制第二个变量（右轴）
+ax2 = ax.twinx()
+ax2.plot(climate_change.index, climate_change["relative_temp"])
+ax2.set_ylabel('Relative temperature (Celsius)')
+
+plt.show()
+```
+
+#### 用颜色区分变量
+- 使用双轴后，需要利用颜色来辅助区分两条线。
+- 可以在 `plot()` 方法和设置坐标轴标签 `set_ylabel()` 时传入 `color` 参数，使线条和文字颜色保持一致。
+```python
+ax.plot(..., color='blue')
+ax.set_ylabel('CO2 (ppm)', color='blue')
+
+ax2.plot(..., color='red')
+ax2.set_ylabel('Relative temperature (Celsius)', color='red')
+```
+
+#### 为刻度着色
+- 除了标签，还可以更改坐标轴的刻度线和刻度标签的颜色，进一步强化颜色编码。
+- 使用 `tick_params()` 方法，第一个参数传入 `'y'` 或 `'x'` 指定轴，用 `colors` 参数设置颜色。
+```python
+ax.tick_params('y', colors='blue')
+ax2.tick_params('y', colors='red')
+```
+- 同时给坐标轴标签和刻度着色，可以清楚地对应每个变量使用的是哪一侧的刻度。
+
+#### 将绘图逻辑封装为函数
+- 为了减少代码重复并提高可读性，可以将这套绘图模式封装成一个自定义函数：
+```python
+def plot_timeseries(axes, x, y, color, xlabel, ylabel):
+    axes.plot(x, y, color=color)
+    axes.set_xlabel(xlabel)
+    axes.set_ylabel(ylabel, color=color)
+    axes.tick_params('y', colors=color)
+```
+- 之后在绘图时直接调用该函数，传入相应的参数即可。
+
+---
+
+
+
 
 # 定量比较与统计可视化
 
