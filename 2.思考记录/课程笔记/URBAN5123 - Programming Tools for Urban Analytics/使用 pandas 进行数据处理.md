@@ -133,7 +133,7 @@ unique_dogs["breed"].value_counts(normalize=True)
 ```
 - 例如，结果显示 `Labrador 0.250`，表示有 25% 的狗是拉布拉多。
 
-### 分组汇总统计
+## 分组汇总统计
 
 #### 分组汇总的动机
 - 之前学习的是为整个数据集的所有行计算单一的汇总统计量。
@@ -176,3 +176,481 @@ dogs.groupby(["color", "breed"])["weight_kg"].mean()
 ```python
 dogs.groupby(["color", "breed"])[["weight_kg", "height_cm"]].mean()
 ```
+
+
+```python
+# For each store type, aggregate weekly_sales: get min, max, mean, and median
+
+sales_stats = sales.groupby('type')['weekly_sales'].agg(['min', 'max', 'mean', 'median'])
+
+  
+
+# Print sales_stats
+
+print(sales_stats)
+
+  
+
+# For each store type, aggregate unemployment and fuel_price_usd_per_l: get min, max, mean, and median
+
+unemp_fuel_stats = sales.groupby('type')[['unemployment','fuel_price_usd_per_l']].agg(['min', 'max', 'mean', 'median'])
+
+  
+
+# Print unemp_fuel_stats
+
+print(unemp_fuel_stats)
+```
+
+
+
+## 数据透视表
+
+#### 基本概念
+- 数据透视表是另一种计算分组汇总统计的方法，与电子表格中的透视表功能类似。
+- 在 pandas 中，使用 `pivot_table()` 方法可以轻松实现。
+
+#### 从分组到透视表
+- 使用 `pivot_table` 可以达到与 `groupby` 相同的效果。
+  - `values` 参数：指定您想要汇总的列。
+  - `index` 参数：指定您想要分组的列。
+- 默认情况下，`pivot_table` 会对每个分组取**平均值**。
+```python
+# 使用 groupby
+dogs.groupby("color")["weight_kg"].mean()
+
+# 使用 pivot_table
+dogs.pivot_table(values="weight_kg", index="color")
+```
+
+#### 应用不同统计量
+- 如果需要计算不同的汇总统计，可以使用 `aggfunc` 参数并传入相应的函数（如计算中位数）。
+```python
+dogs.pivot_table(values="weight_kg", index="color", aggfunc="median")
+```
+
+#### 计算多种统计量
+- 如果想一次性获得多种汇总统计，可以给 `aggfunc` 参数传入一个函数列表（如同时计算平均值和中位数）。
+```python
+dogs.pivot_table(values="weight_kg", index="color", aggfunc=["mean", "median"])
+```
+
+#### 按两个变量透视
+- 要按两个变量（如颜色和品种）分组，可以在 `columns` 参数中指定第二个变量。
+```python
+dogs.pivot_table(values="weight_kg", index="color", columns="breed")
+```
+- **注意**：结果中会出现 `NaN`（缺失值），这是因为某些组合在数据集中不存在（例如没有黑色吉娃娃或灰色拉布拉多）。展示方式与 `groupby` 略有不同（形成矩阵式表格），但数值含义相同。
+
+#### 在透视表中填充缺失值
+- 如果不希望显示缺失值，可以使用 `fill_value` 参数指定填充内容（如填充为 0）。
+```python
+dogs.pivot_table(values="weight_kg", index="color", columns="breed", fill_value=0)
+```
+
+#### 透视表求和（添加边际汇总）
+- 将 `margins` 参数设置为 `True` 后，数据透视表的最后一行和最后一列会给出各自列或行的总体均值汇总。
+- **注意**：计算均值时，不会把用 0 填充的缺失值算进去。
+- **示例解读**：
+  - 拉布拉多列的最后一行：拉布拉多犬的平均体重（26 kg）。
+  - 棕色行的最后一列：棕色狗的平均体重（24 kg）。
+  - 右下角数值：整个数据集中所有狗的平均体重。
+```python
+dogs.pivot_table(values="weight_kg", index="color", columns="breed", 
+                 fill_value=0, margins=True)
+```
+- **优势**：开启 `margins=True` 可以同时查看到多个层级的汇总统计（整个数据集、按单一变量分组、按双变量分组）。
+
+
+---
+
+
+### 显式索引
+
+#### 回顾 DataFrame 的组成
+- DataFrame 由三部分组成：用于存放数据的 NumPy 数组，以及两个索引（分别保存行和列的信息）。
+- `.columns` 是一个包含列名的 `Index` 对象。
+- `.index` 是一个包含行编号的 `Index` 对象。
+
+#### 设置与重置索引
+- **将列设为索引**：使用 `set_index()` 方法把某一列从 DataFrame 的主体移到索引里。
+```python
+dogs_ind = dogs.set_index("name")
+print(dogs_ind)
+```
+- 视觉提示：设置为索引的列（如 name）会移到最左侧，并且索引的数值会**左对齐**。
+- **移除索引（重置）**：使用 `reset_index()` 方法撤销刚才的操作，将索引恢复为普通列，并创建默认的数字索引。
+```python
+dogs_ind.reset_index()
+```
+- **丢弃索引**：如果不想保留原来的索引数据，可以使用 `reset_index(drop=True)` 完全移除它。
+```python
+dogs_ind.reset_index(drop=True)
+```
+
+#### 使用索引进行子集筛选
+- 使用索引能让子集筛选的代码更简洁。
+- **基于列筛选**（比较冗长）：
+```python
+dogs[dogs["name"].isin(["Bella", "Stella"])]
+```
+- **基于索引筛选**（推荐）：使用 `loc` 方法，直接传入索引值的列表。
+```python
+dogs_ind.loc[["Bella", "Stella"]]
+```
+
+#### 索引值的非唯一性
+- 索引中的取值**不需要唯一**。例如，按品种设置索引，会出现多个 "Labrador"。
+- 如果使用 `loc` 按重复的索引值筛选，所有匹配的行都会返回。
+```python
+dogs_ind2 = dogs.set_index("breed")
+dogs_ind2.loc["Labrador"]
+```
+
+#### 多级索引（层级索引）
+- 通过向 `set_index()` 传入一个列名列表，可以将多列放入索引中，形成**多级索引**（分层索引）。
+- 此时，内层索引嵌套在外层索引之下（如 `color` 嵌套在 `breed` 下）。
+```python
+dogs_ind3 = dogs.set_index(["breed", "color"])
+```
+- **取外层索引**：将外层索引值的列表传给 `loc`。
+```python
+dogs_ind3.loc[["Labrador", "Chihuahua"]]
+```
+- **取内层索引**：传入**元组列表**，元组中依次指定外层和内层的值。返回的行必须满足元组中的所有条件。
+```python
+dogs_ind3.loc[[("Labrador", "Brown"), ("Chihuahua", "Tan")]]
+```
+
+#### 按索引值排序
+- 使用 `sort_index()` 按索引值排序。默认从外到内、按升序排序。
+```python
+dogs_ind3.sort_index()
+```
+- 通过 `level` 和 `ascending` 参数传入列表来控制排序方式（可多级不同方向）。
+```python
+dogs_ind3.sort_index(level=["color", "breed"], ascending=[True, False])
+```
+
+### 索引的争议与优缺点
+
+#### 存在的问题
+- **数据冗余**：索引值本质上也是数据，把同一份数据以多种形式存放会增加理解难度。
+- **违反整洁数据原则**：Tidy Data 原则强调每一行是一条观测，每个变量单独占一列。索引违反了这一点，因为索引值没有自己的列。
+- **语法复杂**：在 pandas 中，操作索引的语法和操作列的语法并不相同。两套语法并行增加了代码的复杂度，容易出错。
+
+#### 结论
+- 如果决定不使用索引，这完全合理。但理解其工作方式仍然有用，特别是为了看懂他人编写的代码。
+
+---
+### 使用 `.loc` 和 `.iloc` 进行切片与子集
+
+#### 基础切片概念
+- **切片**：从对象中选取一段连续元素的技巧。
+- **列表切片**：在方括号中写入起始位置和结束位置，用冒号分开。位置从 0 开始，且**结束位置不包含在切片中**。
+```python
+breeds[2:5]  # 包含索引 2, 3, 4 的元素
+```
+
+#### 对 DataFrame 进行切片（`.loc`）
+- 在使用 `.loc` 切片前，**建议先对索引进行排序**（例如使用 `sort_index()`）。
+- **切片外层索引**：调用 `loc` 并传入起始值和结束值，用冒号分开。
+  - 与列表切片不同：传入的是**索引值**而非行号。
+  - 重要区别：`.loc` 切片**包含最后一个值**。
+```python
+dogs_srt.loc["Chow Chow":"Poodle"]  # 包含 Poodle
+```
+- **错误切片内层索引**：直接在 `loc` 中传内层的起始和结束值（如 `"Tan":"Grey"`）会返回空的 DataFrame，且 pandas 不会报错，需格外小心。
+- **正确切片内层索引**：必须将起始和结束位置作为**元组**传入。
+```python
+dogs_srt.loc[("Labrador", "Brown"):("Schnauzer", "Grey")]
+```
+
+#### 切片列（`.loc` 双参数）
+- DataFrame 是二维对象，可以同时对行和列进行切片，给 `loc` 传入两个参数：`[行切片, 列切片]`。
+- 单独一个冒号 `:` 表示保留全部（所有行或所有列）。
+```python
+# 选取所有行，列从 name 切片到 height_cm
+dogs_srt.loc[:, "name":"height_cm"]
+```
+
+#### 双重切片
+- 同时在行和列上做切片：
+```python
+dogs_srt.loc[
+    ("Labrador", "Brown"):("Schnauzer", "Grey"),
+    "name":"height_cm"
+]
+```
+
+#### 按日期切片
+- 将日期列设为索引并排序后，可按日期范围进行子集选择。
+- **精确日期切片**：起始和结束日期以字符串形式传入。
+```python
+dogs.loc["2014-08-25":"2016-09-16"]
+```
+- **按部分日期切片**：只写年份（如 `"2014"` 和 `"2016"`），pandas 会理解为从 2014 年初到 2016 年末。
+```python
+dogs.loc["2014":"2016"]
+```
+
+#### 按行/列号取子集（`.iloc`）
+- 使用 `.iloc` 方法，通过行号和列号的整数位置进行切片。
+- 语法有两个参数：一个用于行，一个用于列。
+- **注意**：与 `.loc` 不同，`.iloc` 的行为与列表切片一致，**结束位置不包含在结果中**。
+```python
+# 选取第 2, 3, 4 行，以及第 1, 2, 3 列
+dogs.iloc[2:5, 1:4]
+```
+
+---
+
+### 使用数据透视表的高级操作
+
+#### 更大的狗数据集与透视表回顾
+- 使用包含更多样本的狗狗数据集进行更复杂的计算。
+- 复习创建透视表的方法，使用 `pivot_table()`：
+  - 第一个参数：要聚合的数值列名（默认聚合函数是平均值）。
+  - `index` 参数：要分组并显示为行的列。
+  - `columns` 参数：要分组并显示为列的列。
+```python
+dogs_height_by_breed_vs_color = dog_pack.pivot_table(
+    "height_cm", index="breed", columns="color")
+print(dogs_height_by_breed_vs_color)
+```
+
+#### `.loc[]` + 切片
+- 数据透视表本质上就是带有排序索引的 DataFrame，因此之前学过的索引和切片技巧都可以用在这里。
+- 使用 `loc` 配合切片非常适合对透视表进行子集筛选：
+```python
+dogs_height_by_breed_vs_color.loc["Chow Chow":"Poodle"]
+```
+
+#### `axis` 参数
+- 计算 DataFrame 汇总统计量的方法（如 `mean()`）通常带有一个 `axis` 参数。
+- **默认行为（跨行计算）**：默认值是 `axis="index"`，意思是跨行计算统计量。例如，为每种**颜色**计算平均身高（即跨品种计算）。
+```python
+dogs_height_by_breed_vs_color.mean(axis="index")
+```
+- **跨列计算**：如果要为每一行计算汇总统计量（跨列计算），将 `axis` 设为 `"columns"`。例如，为每个**品种**计算平均身高（即跨颜色计算）。
+```python
+dogs_height_by_breed_vs_color.mean(axis="columns")
+```
+
+#### 使用注意
+- 对大多数 DataFrame 来说，跨列计算（`axis="columns"`）往往不太合理，因为各列的数据类型通常不同（如数值、字符串等混合）。
+- 但**数据透视表是个特例**，它的每一列数据类型都是一致的，因此跨列计算是有意义的。
+
+
+
+
+---
+
+### 可视化数据
+
+#### 基础准备
+- 使用 `matplotlib.pyplot` 进行图表展示，通常导入并简写为 `plt`。
+- 本课使用包含大量狗狗数据的 `dog_pack` 数据集进行演示。
+
+#### 直方图
+- 用于展示数值变量的分布。
+- 使用 `.hist()` 方法生成：
+```python
+import matplotlib.pyplot as plt
+dog_pack["height_cm"].hist()
+plt.show()
+```
+- 可通过 `bins` 参数调整柱子的数量，以更清晰地观察数据分布的形状：
+```python
+dog_pack["height_cm"].hist(bins=20)
+```
+
+#### 条形图
+- 用于揭示分类变量（如品种）与数值变量（如体重）之间的关系。
+- 先使用 `groupby` 计算各分类的均值，再使用 `.plot(kind="bar")` 绘制：
+```python
+avg_weight_by_breed = dog_pack.groupby("breed")["weight_kg"].mean()
+avg_weight_by_breed.plot(kind="bar", title="Mean Weight by Dog Breed")
+plt.show()
+```
+
+#### 折线图
+- 非常适合展示数值变量随时间的变化。
+- 需要指定 X 轴和 Y 轴的列，并将 `kind` 设为 `"line"`：
+```python
+sully.plot(x="date", y="weight_kg", kind="line")
+plt.show()
+```
+- 可以通过 `rot` 参数旋转 X 轴标签的角度，使其更易读：
+```python
+sully.plot(x="date", y="weight_kg", kind="line", rot=45)
+```
+
+#### 散点图
+- 用于观察两个数值变量之间的关系。
+- 指定 X 和 Y 轴，将 `kind` 设为 `"scatter"`：
+```python
+dog_pack.plot(x="height_cm", y="weight_kg", kind="scatter")
+plt.show()
+```
+
+#### 图层叠加与图例
+- 可以在同一张图上叠加多个图层（如分别绘制雌性和雄性狗狗的直方图）。
+- 使用 `plt.legend()` 添加图例以区分颜色：
+```python
+dog_pack[dog_pack["sex"]=="F"]["height_cm"].hist()
+dog_pack[dog_pack["sex"]=="M"]["height_cm"].hist()
+plt.legend(["F", "M"])
+plt.show()
+```
+
+#### 透明度
+- 当图层叠加导致遮挡时，可以使用 `alpha` 参数设置透明度。
+- 数值范围 0（完全透明）到 1（完全不透明）：
+```python
+dog_pack[dog_pack["sex"]=="F"]["height_cm"].hist(alpha=0.7)
+dog_pack[dog_pack["sex"]=="M"]["height_cm"].hist(alpha=0.7)
+plt.legend(["F", "M"])
+plt.show()
+```
+
+### 后续数据集
+- 本章后续将使用包含美国牛油果每周销售数据的 Avocado 数据集进行练习（数据按牛油果大小及是否为有机进行划分）。
+
+
+---
+
+### 缺失值处理
+
+#### 什么是缺失值
+- 大多数数据都不完美，数据集中可能缺少某些项（例如，给狗狗称重时秤坏了）。
+- 在 pandas 的 DataFrame 中，缺失值用 `NaN` 表示，即 "not a number"。
+
+#### 检测缺失值
+- **基础检测**：对 DataFrame 调用 `isna()` 方法，会返回一个相同大小的布尔型 DataFrame，指示每个位置的值是否缺失。
+```python
+dogs.isna()
+```
+- **检测列中是否存在缺失**：将 `isna()` 和 `any()` 链接使用，会为每一列返回一个布尔值，表示该列是否有任何缺失值。
+```python
+dogs.isna().any()
+```
+- **统计缺失数量**：因为对布尔值求和等同于计算 `True` 的数量，将 `sum()` 和 `isna()` 结合，可以统计每一列中 `NaN` 的数量。
+```python
+dogs.isna().sum()
+```
+
+#### 可视化缺失值
+- 可以将每列的缺失计数用柱状图直观地展示出来。
+- 当不同变量中都有缺失数据时，这种图能提供很好的信息。
+```python
+import matplotlib.pyplot as plt
+dogs.isna().sum().plot(kind="bar")
+plt.show()
+```
+
+#### 处理缺失值的方法
+- **删除缺失值**：使用 `dropna()` 方法可以删除包含缺失值的行。
+```python
+dogs.dropna()
+```
+  - **缺点**：如果缺失值较多，这种方法会丢失大量观测数据，可能不理想。
+- **替换缺失值**：使用 `fillna()` 方法，传入一个指定的值，所有的 `NaN` 都会被替换成该值。
+```python
+dogs.fillna(0)
+```
+  - **进阶**：除了填入固定值，还有更多高级的缺失值填补技术（如插值、填充均值等）。
+
+#### 学习建议
+- 如果想深入学习缺失值填补技术，可以参考数据科学相关的专项课程。
+
+---
+
+---
+
+### 创建 DataFrame
+
+#### 字典基础回顾
+- 在创建 DataFrame 之前，需要先了解 Python 中的字典（Dictionary）。
+- 字典使用花括号 `{}` 创建，保存的是**键值对**（key-value pairs），格式为 `"键": 值`。
+- 通过方括号 `[]` 和键名可以访问字典中的值。
+```python
+my_dict = {
+    "title": "Charlotte's Web",
+    "author": "E.B. White",
+    "published": 1952
+}
+
+print(my_dict["title"])
+# 输出: Charlotte's Web
+```
+
+#### 从零开始创建 DataFrame 的方法
+有两种常见的方法可以从零开始创建 DataFrame：
+1. **由字典列表创建**（按行构建）。
+2. **由列表字典创建**（按列构建）。
+
+#### 方法一：字典列表（按行）
+- 使用方括号 `[]` 创建一个列表，列表中的每个元素都是一个代表一行数据的字典。
+- 字典中的**键将成为列名**，对应的**值是该行在这一列上的数据**。
+- 将包含字典的列表传入 `pd.DataFrame()` 即可转换。
+```python
+data = [
+    {"name": "Ginger", "breed": "Dachshund", "height_cm": 22, "weight_kg": 10},
+    {"name": "Scout", "breed": "Dalmatian", "height_cm": 59, "weight_kg": 25}
+]
+
+df = pd.DataFrame(data)
+```
+
+#### 方法二：列表字典（按列）
+- 使用花括号 `{}` 创建一个字典，按列来整理数据。
+- 字典中的**键将成为列名**，对应的**值是一个包含该列所有数据的列表**（按从上到下的顺序）。
+- 将字典传入 `pd.DataFrame()` 即可转换。
+```python
+data = {
+    "name": ["Ginger", "Scout"],
+    "breed": ["Dachshund", "Dalmatian"],
+    "height_cm": [22, 59],
+    "weight_kg": [10, 25]
+}
+
+df = pd.DataFrame(data)
+```
+
+
+
+---
+### 读取与写入 CSV
+
+#### 什么是 CSV 文件？
+- CSV 全称是 **Comma-Separated Values**（逗号分隔值）。
+- 它是一种常见的文本数据存储格式，专为表格类数据（如 DataFrame）设计。
+- 文件中每一行代表一行数据，每个值之间用逗号分隔。
+- 大多数数据库、编程语言（包括 Python）和电子表格程序都可以使用或生成 CSV 文件。它是与不同工具的用户共享数据的理想格式。
+
+#### 读取 CSV 到 DataFrame
+- 使用 pandas 提供的 `read_csv()` 函数可以方便地将 CSV 文件读取为 DataFrame。
+- 只需将 CSV 的文件路径作为参数传入：
+```python
+import pandas as pd
+
+new_dogs = pd.read_csv("new_dogs.csv")
+print(new_dogs)
+```
+
+#### DataFrame 操作
+- 数据加载为 DataFrame 后，就可以使用 pandas 的各种功能进行处理。
+- 例如，进行向量化运算，基于现有的列创建新列（计算狗狗的 BMI）：
+```python
+new_dogs["bmi"] = new_dogs["weight_kg"] / (new_dogs["height_cm"] / 100) ** 2
+print(new_dogs)
+```
+
+#### 将 DataFrame 写入 CSV
+- 如果修改了数据并希望保存，可以使用 DataFrame 的 `to_csv()` 方法。
+- 传入一个新的文件路径，即可将 DataFrame 导出为 CSV 文件：
+```python
+new_dogs.to_csv("new_dogs_with_bmi.csv")
+```
+- 导出后的新文件将包含所有原始列以及新添加的 `bmi` 列。

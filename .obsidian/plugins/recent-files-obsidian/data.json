@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "Matplotlib 数据可视化入门",
+      "path": "2.思考记录/课程笔记/URBAN5123 - Programming Tools for Urban Analytics/Matplotlib 数据可视化入门.md"
+    },
+    {
+      "basename": "使用 pandas 进行数据处理",
+      "path": "2.思考记录/课程笔记/URBAN5123 - Programming Tools for Urban Analytics/使用 pandas 进行数据处理.md"
+    },
+    {
+      "basename": "在 Python 中处理地理空间数据",
+      "path": "2.思考记录/课程笔记/URBAN5123 - Programming Tools for Urban Analytics/在 Python 中处理地理空间数据.md"
+    },
+    {
+      "basename": "在 Python 中可视化地理空间数据",
+      "path": "2.思考记录/课程笔记/URBAN5123 - Programming Tools for Urban Analytics/在 Python 中可视化地理空间数据.md"
+    },
+    {
       "basename": "R05 部分 Biljecki and Ito 2021 review 街景影像在城市分析与地理信息系统中的应用",
       "path": "2.思考记录/课程笔记/URBAN5125 - Big Data, AI & Urban Analytics/R05 部分 Biljecki and Ito 2021 review 街景影像在城市分析与地理信息系统中的应用.md"
     },
@@ -183,18 +199,6 @@
     {
       "basename": "FINAL_SUMMARY",
       "path": "2.思考记录/研究思考/1.街景环境与运动路线/FINAL_SUMMARY.md"
-    },
-    {
-      "basename": "01-城市科学理论基础",
-      "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/01-理论基石/01-城市科学理论基础.md"
-    },
-    {
-      "basename": "02-复杂系统理论与城市涌现",
-      "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/01-理论基石/02-复杂系统理论与城市涌现.md"
-    },
-    {
-      "basename": "00-城市分析知识体系总索引",
-      "path": "2.思考记录/知识体系构建/城市分析Urban Analytics/00-城市分析知识体系总索引.md"
     }
   ],
   "omittedPaths": [],
