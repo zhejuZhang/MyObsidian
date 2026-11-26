@@ -1,0 +1,648 @@
+## Formative Assessment 作业要求详细解析
+
+## 一、作业基本要求
+
+|项目|具体要求|
+|---|---|
+|课程|URBAN5123 – Programming Tools for Urban Analytics|
+|学年|2026/2027|
+|教师|Dr Qunshan Zhao|
+|作业类型|Formative Assessment|
+|作业内容|Data Science Project Proposal|
+|篇幅限制|最多一页（Maximum of 1 page）|
+|研究领域|数据科学与城市分析|
+|编程工具|Python 及相关程序包等|
+|提交平台|Moodle|
+|反馈方式|Moodle|
+|作业目的|为 Summative Assessment 提前确定研究方案，并获得教师反馈|
+## 二、Formative 与 Summative Assessment 的关系
+这两项作业并不是两个独立的研究任务，而是同一个数据科学项目的前期设计和后期实施。
+Formative Assessment  Data Science Project Proposal 确定选题、数据、目标、方法及编程工具
+Teacher Feedback 教师评估研究设计并提出修改意见
+Revised Project Design 修改研究问题、数据和技术路线
+Summative Assessment Data Science Report 数据处理、编程分析、建模、可视化与结论
+## 三、Formative Assessment 必须包含哪些内容？
+### 3.1 Research Topic / Theme（研究主题）
+
+原文：
+
+> A data science project topic/theme (ideally this will tie with one of the research ideas you have, and will work with new forms of urban big data).
+
+要求提出一个数据科学项目的研究主题。理想情况下，这个项目能够与你个人的研究兴趣相结合，并且使用新形式的城市大数据。
+
+这里有三个值得关注的关键词：
+
+|关键词|具体理解|
+|---|---|
+|Data science project|需要通过编程、数据处理和分析解决问题|
+|Research ideas|鼓励结合个人研究兴趣，可以为硕士毕业论文积累经验|
+|New forms of urban big data|鼓励使用街景、出行记录、共享单车、POI、社交媒体等新型城市数据|
+
+注意，原文使用的是 ideally，说明结合个人研究方向和新型城市大数据属于鼓励性要求，而不是严格的强制要求。
+
+### 3.2 Research Motivation（研究动机）
+
+原文：
+
+> Clearly explain why you want to do this analysis.
+
+这一部分需要回答：为什么这个问题值得研究？
+
+研究动机可以从现实问题、现有研究的不足、数据科学的应用价值三个方面进行阐述。不需要在一页的 Proposal 中展开完整的文献综述，但需要体现研究的必要性。
+
+例如，以共享单车为研究对象：
+
+> Bike-sharing systems are an important component of sustainable urban transport. However, cycling demand varies across locations and time periods. Understanding these variations could support more efficient bicycle redistribution and urban transport planning.
+
+中文：
+
+共享单车系统是城市可持续交通的重要组成部分。然而，骑行需求在不同空间位置和时间段存在差异。理解这些差异有助于优化共享单车调度和城市交通规划。
+
+这里需要避免仅仅从技术角度阐述研究动机。
+
+例如，“因为我想学习机器学习，所以我要使用随机森林模型”并不是充分的城市研究动机。更合理的逻辑是先提出城市问题，再解释为什么需要使用机器学习解决该问题。
+
+### 3.3 Research Objectives（研究目标）
+
+原文要求明确：
+
+> What will be your objectives and expected outcomes.
+
+研究目标需要说明你具体准备完成哪些分析任务。
+
+建议设置2–4个具有可操作性的研究目标，并且让每个目标都能对应具体的编程与分析过程。
+
+例如，以城市骑行活动为例：
+
+|研究目标|对应分析任务|
+|---|---|
+|Objective 1|探索骑行活动的时空分布特征|
+|Objective 2|构建建成环境和道路网络特征变量|
+|Objective 3|分析建成环境特征与骑行活动之间的关系|
+|Objective 4|评估不同预测模型的表现|
+
+研究目标不应停留在 Understand urban mobility 这样宽泛的描述上，而应使用具有明确分析含义的动词。
+
+|英文动词|含义|
+|---|---|
+|Explore|探索数据特征|
+|Identify|识别空间模式或影响因素|
+|Quantify|量化某种特征或关系|
+|Examine|检验变量之间的关系|
+|Compare|比较不同方法或结果|
+|Predict|预测某种城市现象|
+|Evaluate|评估模型或方法的表现|
+|Visualise|可视化分析结果|
+
+### 3.4 Expected Outcomes（预期成果）
+
+预期成果与研究目标是两个不同的概念。
+
+- Research Question：我想回答什么问题？
+    
+- Research Objectives：我准备完成哪些分析？
+    
+- Expected Outcomes：这些分析最终能够产生什么成果？
+    
+
+例如：
+
+|Research Objectives|Expected Outcomes|
+|---|---|
+|分析骑行活动的空间分布|骑行活动空间分布图|
+|识别骑行活动的时间变化|小时、工作日与周末变化曲线|
+|分析建成环境与骑行的关系|变量关联程度的统计结果|
+|构建骑行需求预测模型|模型性能评估与预测结果|
+|比较不同空间尺度|不同尺度下的分析结果及敏感性评价|
+
+这里需要注意：Expected Outcomes 不等于提前预设研究结论。
+
+例如，在尚未开展研究之前，不宜直接写：
+
+> Urban greenness significantly increases cycling activity.
+
+因为你还没有证据证明这一关系。
+
+更合理的表达是：
+
+> The project is expected to provide quantitative evidence on the relationship between urban greenness and cycling activity.
+
+即预期提供有关两者关系的量化证据，而不是提前确定关系的方向和显著性。
+
+### 3.5 Programming Tools（编程工具）
+
+原文：
+
+> Demonstrate what programming tools (related python packages, etc.) you will use in this data science project.
+
+这是本课程区别于一般城市研究课程的重要要求。
+
+你不仅需要说明研究什么问题，还需要体现自己如何使用编程工具完成整个数据科学项目。
+
+以下是我建议的 Python 工具选择，并非文件规定必须使用的程序包。
+
+|Python package / Tool|主要用途|
+|---|---|
+|`pandas`|表格数据读取、清洗、合并与统计|
+|`numpy`|数值计算|
+|`geopandas`|空间数据处理与空间连接|
+|`shapely`|空间几何运算|
+|`osmnx`|OSM道路网络获取与分析|
+|`networkx`|网络分析与网络指标计算|
+|`matplotlib`|基础数据可视化|
+|`seaborn`|统计数据可视化|
+|`contextily`|地图底图与空间可视化|
+|`scikit-learn`|机器学习与模型评估|
+|`statsmodels`|统计建模与回归分析|
+|`libpysal` / `esda`|空间权重与探索性空间数据分析|
+|`Jupyter Notebook`|编程实验与分析过程记录|
+|`Git / GitHub`|代码版本管理|
+
+在 Proposal 中，不建议简单地堆砌大量程序包名称，而应该解释每个工具在分析过程中承担的任务。
+
+例如：
+
+> Pandas will be used for data cleaning and manipulation, while GeoPandas and OSMnx will be employed for spatial integration and street-network analysis. Scikit-learn will support predictive modelling and model evaluation, and Matplotlib will be used to visualise the results.
+
+这样能够清楚体现工具、方法和研究目标之间的联系。
+
+### 3.6 Additional Information / Feedback（希望获得的反馈）
+
+原文：
+
+> Any other relevant information you would like feedback on.
+
+这一部分容易被忽略，但它与 Formative Assessment 的目的直接相关。
+
+你可以主动提出当前研究设计存在的不确定性，让老师提供针对性的建议。
+
+例如：
+
+- 数据集的规模和复杂程度是否适合本课程？
+    
+- 是否应该使用街段、规则格网或者行政区作为空间分析单元？
+    
+- 是否有必要引入机器学习模型？
+    
+- 研究范围是否过大？
+    
+- 多源数据融合的技术路线是否可行？
+    
+- 是否需要考虑空间自相关和空间尺度敏感性？
+    
+
+尤其当你已经有一定的研究兴趣，但还没有确定具体研究方法时，这一部分可以发挥很大的作用。
+
+## 四、数据集有什么要求？
+
+文件第4页提供了三个来自 Kaggle 的示例数据集。
+
+4.Formative_assessment.pdf
+
+[Noé Campo - Portfolio](https://images.openai.com/static-rsc-4/fwIS65opxOHLRxEk4fUjkwYL79QQXnkNpVNtb2FYjC1o4E5Gob78z-07Yz88qk_RYq9dnOamBE_pBAVq2m5ebSoeVhZ7PDCuk10u0vV8EC_GN8NJ3tFBiRcDjcCctALFaw2bSV4SlNk_fPKXQXMGsejicdy76K0QmzlmvXaxI6g?purpose=inline)
+
+1. Uber Pickups in New York City
+
+纽约网约车上车记录。
+
+适合研究城市出行需求、时空分布、热点识别以及出行模式。
+
+[Kaggle 数据集](https://www.kaggle.com/datasets/fivethirtyeight/uber-pickups-in-new-york-city?utm_source=chatgpt.com)
+
+[Analysis of Airbnb Dataset in New York City for 2019 | by Aikerim Belispayeva | Medium](https://images.openai.com/static-rsc-4/TUk-mSOy5jmA71wGBPbnkNrQDKoKUcSK8NBlhyxVyXY9TjGSJOXvHK2pNO1xW0Fh8GEE6bZi9w1CPBgQhmSE9FiUxDYeiW83GUpTYvEDS9Xvsn8L9D9claTq0zhZalj3xxFU7iVpAuNpD_9UAUwYYef4u2YSJ-6SZZvWOCEsWLc?purpose=inline)
+
+2. New York City Airbnb Open Data
+
+纽约 Airbnb 房源数据。
+
+适合研究房源空间分布、价格差异、区位因素以及价格预测。
+
+[Kaggle 数据集](https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data?utm_source=chatgpt.com)
+
+[如何在伦敦租自行车？| “共享单车”Santander Cycles - Red Scarf | 你必备的英国指南Red Scarf](https://images.openai.com/static-rsc-4/cO73G4NsEenO8ULuLO-Kw8ZuPkbBCb0kmxRK3JvCVHZsvI19aZN6alYhIc_Wr7hHDl_Rh2wwNf9wI4uTXmiFkhIQbRRRP8wQCF2keFTQOU8y8YCFmfhMC9A_ZIzQKqNBXYhXGqPsJfL7cp3CmM6pIEwlITnR2tqkPXAIJxBAB4g?purpose=inline)
+
+3. London Bike Sharing Dataset
+
+伦敦共享单车数据。
+
+适合研究骑行需求、时间变化、天气因素与需求预测。
+
+[Kaggle 数据集](https://www.kaggle.com/datasets/hmavrodiev/london-bike-sharing-dataset?utm_source=chatgpt.com)
+
+以上三个数据集只是 Example datasets，不是指定数据集。你完全可以选择其他符合研究问题的数据。
+
+从这些示例可以推断，老师鼓励的数据科学项目具有以下特征：
+
+|特征|含义|
+|---|---|
+|Urban relevance|与城市现象或城市问题有关|
+|Data availability|具有可获取的数据|
+|Computational analysis|能够通过编程进行数据处理|
+|Analytical potential|可以开展统计、空间分析或建模|
+|Visualisation potential|能够有效展示分析结果|
+
+另外，老师没有规定必须进行空间分析，也没有规定必须使用多个数据集或者达到某个数据量。
+
+如果选择其他数据，我建议在 Proposal 中明确数据来源、研究区域、数据时间范围、主要变量以及空间分析单元。这虽然不是第3页单独列出的硬性要求，但直接关系到项目的可行性。
+
+## 五、从 Summative Assessment 反推 Formative 应该怎么写
+
+文件第5页列出了最终 Data Science Report 的五个组成部分。
+
+4.Formative_assessment.pdf
+
+这一页实际上为你提供了设计 Formative Assessment 的重要依据。
+
+### 第一部分：Introduction and Objectives
+
+引言与研究目标。
+
+最终报告需要解释研究背景、研究问题、研究动机和目标。
+
+因此，在 Formative 阶段就应该确定一个明确、可分析的 Research Question。
+
+### 第二部分：Data Cleaning, Exploratory (Spatial) Data Analysis, and Feature Engineering
+
+数据清洗、探索性（空间）数据分析与特征工程。
+
+这一部分包含三个不同层面的工作。
+
+|分析环节|具体内容|
+|---|---|
+|Data Cleaning|缺失值处理、重复值检查、异常值处理、数据类型转换|
+|Exploratory Data Analysis (EDA)|描述性统计、变量分布、相关性、时间变化|
+|Exploratory Spatial Data Analysis (ESDA)|空间分布、空间聚集、空间自相关等|
+|Feature Engineering|从原始数据构建能够用于分析和建模的新变量|
+
+其中，Feature Engineering（特征工程）值得特别关注。
+
+例如，原始数据包含骑行记录、道路网络、建筑物、POI和绿地信息。你可以利用编程构建如下变量：
+
+|原始数据|构建的新特征|
+|---|---|
+|骑行时间戳|小时、月份、是否为周末|
+|道路网络|道路密度、交叉口密度|
+|POI|商业设施密度、土地利用混合度代理指标|
+|街景影像|Green View Index|
+|绿地数据|绿地覆盖率、距最近绿地距离|
+|公共交通站点|公交站点密度、站点可达性|
+|DEM|坡度、高程变化|
+
+这比直接下载一个已经清洗完成的数据集，然后调用机器学习算法训练模型，更能体现空间数据处理和变量构建能力。
+
+### 第三部分：Data Modelling and Analysis
+
+数据建模与分析。
+
+文件没有指定必须使用哪一种模型，也没有强制要求机器学习或深度学习。
+
+你可以根据研究问题选择适合的方法。
+
+|研究目的|可选方法|
+|---|---|
+|分析变量之间的关系|Linear Regression|
+|分析计数型数据|Poisson / Negative Binomial Regression|
+|预测城市现象|Random Forest、Gradient Boosting|
+|识别城市空间类型|K-means、DBSCAN|
+|降维与特征提取|PCA|
+|分析空间自相关|Moran's I、Local Moran's I|
+|分析空间依赖关系|Spatial Regression|
+|评估空间可达性|Network Analysis|
+
+方法并不是越复杂越好。重点是方法能否回答你的研究问题，以及是否能够正确解释分析结果。
+
+### 第四部分：Results Reporting, Explanation, and Visualisation
+
+结果报告、解释与可视化。
+
+除了运行代码获得结果之外，还需要将计算结果转化为具有实际意义的城市分析信息。
+
+例如，使用随机森林分析共享单车需求：
+
+仅报告模型的 R²、RMSE 和 MAE 是不够完整的。还可以讨论模型在什么情况下表现较好，在哪些区域或时间段存在较大预测误差，哪些变量有助于预测，以及这些结果对城市交通规划有何意义。
+
+尤其需要区分预测能力、变量关联和因果解释，避免将机器学习的特征重要性直接解释为因果影响。
+
+### 第五部分：Conclusion
+
+研究结论。
+
+总结研究发现、回答研究问题、讨论局限性以及潜在的城市规划意义。
+
+因此，整个项目可以理解为以下数据科学工作流程：
+
+### 01
+
+Research Question
+
+确定城市研究问题
+
+### 02
+
+Data Acquisition
+
+获取原始数据
+
+### 03
+
+Data Cleaning
+
+数据清洗与预处理
+
+### 04
+
+EDA / ESDA
+
+探索性与空间数据分析
+
+### 05
+
+Feature Engineering
+
+变量构建与特征工程
+
+### 06
+
+Modelling and Analysis
+
+建模与分析
+
+### 07
+
+Evaluation and Visualisation
+
+结果评价、解释及可视化
+
+### 08
+
+Conclusion
+
+回答研究问题与讨论局限性
+
+Formative Assessment 不需要现在完成这些步骤，而需要证明你已经初步考虑如何实现这些步骤。
+
+## 六、Formative Assessment 一页的写作结构
+
+虽然老师没有明确规定字数，但是考虑到一页的篇幅，我建议控制在 350–450 English words 左右，具体取决于排版。
+
+这是建议字数，不是官方字数要求。
+
+## Data Science Project Proposal
+
+URBAN5123 – Programming Tools for Urban AnalyticsStudent ID: XXXXXXX
+
+Project Title
+
+具体的研究题目
+
+1. Background and Research Motivation
+
+研究背景、研究意义和研究问题
+
+70–90 words
+
+2. Research Objectives
+
+2–3个明确的研究目标
+
+40–60 words
+
+3. Data and Study Area
+
+数据来源、空间范围、分析单元
+
+60–80 words
+
+4. Methodology and Programming Tools
+
+技术路线、分析方法、Python程序包
+
+100–120 words
+
+5. Expected Outcomes
+
+预期分析结果与研究贡献
+
+50–60 words
+
+6. Questions for Feedback
+
+希望老师提供建议的问题
+
+30–40 words
+
+这样的写作结构既覆盖了文件中明确规定的内容，又考虑了最终 Summative Assessment 的实施需要。
+
+## 七、结合你的研究方向，应该如何选择项目？
+
+结合你的 GIS 本科背景、Urban Analytics 硕士阶段的学习，以及此前对街景影像、建成环境、出行行为、MAUP 和 UGCoP 等研究问题的关注，我认为没有必要单纯为了完成课程作业而选择一个与你未来研究方向完全无关的 Kaggle 项目。
+
+可以将这次课程作业作为未来硕士毕业论文乃至博士研究的小型前期实验。
+
+### 方向一：建成环境与城市骑行活动
+
+Examining the Relationship between Built Environment Characteristics and Urban Cycling Activity
+
+研究建成环境特征与城市骑行活动之间的关系。
+
+|内容|研究设计|
+|---|---|
+|研究对象|城市骑行活动|
+|数据|骑行记录、OSM、POI、绿地|
+|分析单元|街段或规则格网|
+|特征工程|道路密度、交叉口密度、设施密度、绿地覆盖率|
+|方法|空间连接、探索性分析、回归或机器学习|
+|工具|Pandas、GeoPandas、OSMnx、Scikit-learn|
+|主要难点|骑行数据是否具有足够的空间精度|
+
+这一方向能够将城市交通研究与 GIS 空间数据处理结合起来。
+
+### 方向二：空间尺度选择对城市分析结果的影响
+
+Assessing the Sensitivity of Urban Analytics to Spatial Aggregation: A Case Study of Cycling Activity
+
+评估空间聚合方式对城市分析结果的影响。
+
+概念示意：相同的原始空间观测数据，在不同空间尺度下进行聚合。图中并非真实研究数据，格网比例仅用于示意。
+
+|内容|研究设计|
+|---|---|
+|研究问题|空间尺度是否改变建成环境与骑行活动之间的统计关系？|
+|数据|骑行点位、OSM、POI|
+|空间单元|250m、500m、1000m格网|
+|特征工程|不同空间尺度下重新计算环境变量|
+|方法|空间聚合、回归分析、敏感性分析|
+|成果|比较变量分布、模型系数及模型性能|
+|研究价值|探索 MAUP 对城市分析结果的影响|
+
+这个方向与此前考虑的“空间表征选择—变量构造—统计推断”研究框架具有较强的一致性。
+
+而且不一定需要复杂的深度学习模型，也能够体现较完整的 Python 空间分析流程。
+
+### 方向三：道路网络与城市公共服务可达性
+
+Assessing Spatial Inequalities in Access to Urban Green Spaces Using Street-Network Analysis
+
+基于道路网络分析城市绿地可达性的空间不平等。
+
+|内容|研究设计|
+|---|---|
+|研究区域|Glasgow|
+|数据|OSM道路网络、绿地、人口数据|
+|特征工程|步行距离、可达绿地数量、网络连通性|
+|方法|最短路径、网络可达性、空间统计|
+|工具|OSMnx、NetworkX、GeoPandas、PySAL|
+|成果|绿地可达性地图、空间差异分析|
+
+这一方向的数据科学流程比较清晰，适合作为具有 GIS 特征的 Python 编程课程项目。
+
+### 方向四：街景感知与人类运动行为
+
+Investigating the Association between Street-Level Visual Environments and Human Mobility
+
+研究街道视觉环境与人类运动行为之间的关系。
+
+|内容|研究设计|
+|---|---|
+|数据|街景影像、道路网络、运动轨迹|
+|特征工程|可视绿量、开敞度、建筑物可视比例|
+|方法|图像语义分割、空间数据融合、统计建模|
+|工具|PyTorch、OpenCV、GeoPandas、Scikit-learn|
+|难点|街景影像获取、轨迹数据获取、计算成本|
+
+该方向与未来的研究兴趣契合度较高，但是数据获取和模型实施难度也比较高。如果没有现成的街景指标数据，不建议贸然扩大研究范围。
+
+### 四个方向的综合比较
+
+以下评分为我基于课程要求和你此前研究兴趣作出的初步主观评价，满分5分，不是教师评分标准，也未验证具体数据集的可用性。
+
+建成环境与骑行活动
+
+实施可行性
+
+4/5
+
+课程契合度
+
+4/5
+
+研究潜力
+
+5/5
+
+个人方向契合度
+
+4/5
+
+空间尺度敏感性分析
+
+实施可行性
+
+4/5
+
+课程契合度
+
+5/5
+
+研究潜力
+
+5/5
+
+个人方向契合度
+
+5/5
+
+道路网络与绿地可达性
+
+实施可行性
+
+5/5
+
+课程契合度
+
+4/5
+
+研究潜力
+
+4/5
+
+个人方向契合度
+
+4/5
+
+街景感知与运动行为
+
+实施可行性
+
+2/5
+
+课程契合度
+
+3/5
+
+研究潜力
+
+5/5
+
+个人方向契合度
+
+5/5
+
+我更倾向于推荐你选择方向二：空间尺度敏感性分析，前提是能够找到具备空间位置和适当时间范围的活动数据。
+
+它不仅可以完成本课程要求的数据清洗、空间分析、特征工程、建模和可视化，也可以作为你未来研究 MAUP 问题的初步实验。
+
+不过，在没有阅读完整 Summative Assessment Detail 和评分标准之前，暂时不宜确定最终选题。
+
+## 八、本次作业提交前的检查清单
+
+### Formative Assessment Checklist
+
+0/14
+
+研究主题具有明确的城市分析意义
+
+提出一个具体且可回答的研究问题
+
+解释为什么开展该研究
+
+明确2–4个研究目标
+
+说明计划使用的数据及其来源
+
+初步确认数据获取的可行性
+
+明确研究区域及空间分析单元
+
+说明数据清洗与探索性分析方法
+
+说明特征工程与建模方法
+
+列出Python程序包及其具体用途
+
+说明预期成果而非预设研究结论
+
+提出希望老师反馈的问题
+
+全文不超过一页
+
+核实Moodle截止时间及提交格式
+
+包含官方要求与建议性的项目可行性检查。
+
+## 九、现阶段需要完成什么，不需要完成什么？
+
+|需要完成|暂时不需要完成|
+|---|---|
+|确定研究主题|完整的研究报告|
+|提出研究问题|完整的数据清洗|
+|确定研究目标|全部 Python 代码|
+|寻找并初步检查数据|模型训练与调参|
+|设计分析技术路线|最终统计结果|
+|确定编程工具|完整的地图与图表|
+|说明预期成果|完整的研究结论|
+|撰写一页 Proposal|系统性的长篇文献综述|
+
+总体而言，这次 Formative Assessment 考虑的核心不是你已经完成了多少分析，而是你能否将一个城市研究问题转化为一个可通过编程实现、可通过数据检验、具有明确分析逻辑的数据科学项目。
+
+我建议下一步优先阅读 URBAN5123 的 Summative Assessment Detail 和 Marking Criteria，将两份作业说明结合起来分析，再进行选题、数据筛选和 Proposal 撰写。这样能够避免前期研究设计与最终评分要求出现偏差。
